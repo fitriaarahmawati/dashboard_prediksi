@@ -11,16 +11,15 @@ from sklearn.preprocessing import MinMaxScaler
 # ===== Streamlit UI (Custom Layout) =====
 st.set_page_config(layout="wide")
 
-# === Tambahkan CSS agar tidak bisa scroll & layout terkunci di 1 halaman ===
+# Setup session state
+if "menu_state" not in st.session_state:
+    st.session_state.menu_state = "Dashboard"
+
+# Tambahkan CSS untuk membuat kolom kiri jadi kotak menu berwarna
 st.markdown("""
     <style>
-        html, body, [data-testid="stApp"] {
-            overflow: hidden !important;
-            height: 100vh;
-        }
-
-        /* Menu styling */
-        .menu-box {
+        /* Kolom pertama akan jadi kotak menu */
+        [data-testid="column"]:first-of-type {
             background-color: #ffcccc;
             padding: 1rem;
             border-radius: 10px;
@@ -28,48 +27,44 @@ st.markdown("""
             box-sizing: border-box;
         }
 
-        /* Hilangkan scrollbar */
-        ::-webkit-scrollbar {
-            display: none;
+        /* Hilangkan scroll */
+        html, body, [data-testid="stApp"] {
+            overflow: hidden !important;
+            height: 100vh;
+        }
+
+        /* Atur jarak antar tombol */
+        button {
+            margin-top: 0.5rem;
         }
     </style>
 """, unsafe_allow_html=True)
 
-# === Layout utama: kolom menu dan konten ===
+# Layout 2 kolom: menu dan konten
 col_menu, col_content = st.columns([1, 3])
-col_menu = st.markdown("<div class='menu-box'>", unsafe_allow_html=True)
 
-# === MENU SEBELAH KIRI ===
+# === KOLOM MENU SEBELAH KIRI ===
 with col_menu:
-    st.markdown("<div class='menu-box'>", unsafe_allow_html=True)
-    st.markdown("### 📂 Menu", unsafe_allow_html=True)
-
-    selected = None
+    st.markdown("### 📂 Menu")
     if st.button("📊 Evaluasi Model", use_container_width=True):
-        selected = "evaluasi"
-    elif st.button("📈 Forecast", use_container_width=True):
-        selected = "forecast"
-    elif st.button("📉 Statistik Deskriptif", use_container_width=True):
-        selected = "statistik"
-    elif st.button("💡 Rekomendasi", use_container_width=True):
-        selected = "rekomendasi"
+        st.session_state.menu_state = "Evaluasi Model"
+    if st.button("📈 Forecast", use_container_width=True):
+        st.session_state.menu_state = "Forecast"
+    if st.button("📉 Statistik Deskriptif", use_container_width=True):
+        st.session_state.menu_state = "Statistik Deskriptif"
+    if st.button("💡 Rekomendasi", use_container_width=True):
+        st.session_state.menu_state = "Rekomendasi"
 
-    st.markdown("</div>", unsafe_allow_html=True)
-
-# === KONTEN SEBELAH KANAN ===
+# === KOLOM KONTEN SEBELAH KANAN ===
 with col_content:
-    if selected == "evaluasi":
-        st.subheader("📊 Evaluasi Model")
-        st.write("Konten evaluasi model ditampilkan di sini...")
-    elif selected == "forecast":
-        st.subheader("📈 Forecast")
-        st.write("Konten forecast harga kopi ditampilkan di sini...")
-    elif selected == "statistik":
-        st.subheader("📉 Statistik Deskriptif")
-        st.write("Statistik deskriptif harga kopi...")
-    elif selected == "rekomendasi":
-        st.subheader("💡 Rekomendasi")
-        st.write("Rekomendasi berdasarkan hasil prediksi...")
+    st.subheader(f"📌 {st.session_state.menu_state}")
+    if st.session_state.menu_state == "Evaluasi Model":
+        st.write("Konten evaluasi model...")
+    elif st.session_state.menu_state == "Forecast":
+        st.write("Konten forecast...")
+    elif st.session_state.menu_state == "Statistik Deskriptif":
+        st.write("Konten statistik deskriptif...")
+    elif st.session_state.menu_state == "Rekomendasi":
+        st.write("Konten rekomendasi...")
     else:
-        st.subheader("📊 Dashboard Prediksi Harga Kopi")
-        st.write("Silakan pilih salah satu menu di samping.")
+        st.write("Pilih menu dari kolom kiri.")
