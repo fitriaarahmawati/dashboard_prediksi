@@ -98,7 +98,7 @@ st.markdown("""
             background-color: #ff0800
         }
         .menu-column {
-            background-color: #ffcccc;
+            background-color: #e7bc91;
             padding: 1rem;
             border-radius: 10px;
             height: 100vh;
