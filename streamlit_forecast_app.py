@@ -21,7 +21,7 @@ st.markdown("""
         .navbar {
             background-color: #ffe6e6;
             padding: 1rem 2rem;
-            font-size: 16px;
+            font-size: 20px;
             font-weight: bold;
             border-radius: 10px;
             margin-bottom: 1rem;
