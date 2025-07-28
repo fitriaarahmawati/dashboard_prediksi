@@ -55,56 +55,55 @@ st.markdown("""
             border-radius: 8px;
             margin-top: 0.5rem;
         }
-        .active-button {
-            background-color: #dcb991 !important;
-            color: white !important;
-            font-weight: bold;
-            border: none;
-        }
     </style>
 """, unsafe_allow_html=True)
 
+# === Layout fleksibel tergantung menu ===
 if st.session_state.menu_state == "Rekomendasi":
     col_menu, col_content = st.columns([1, 5])
 
-    # --- Kolom Menu ---
+    # Kolom 1: Menu
     with col_menu:
         st.markdown("### 📂 Menu")
-        st.button("📊 Evaluasi Model", use_container_width=True, key="eval",
-                  on_click=lambda: st.session_state.update(menu_state="Evaluasi Model"))
-        st.button("📈 Forecast", use_container_width=True, key="forecast",
-                  on_click=lambda: st.session_state.update(menu_state="Forecast"))
-        st.button("📉 Statistik Deskriptif", use_container_width=True, key="stats",
-                  on_click=lambda: st.session_state.update(menu_state="Statistik Deskriptif"))
-        st.button("💡 Rekomendasi", use_container_width=True, key="rekom",
-                  on_click=lambda: st.session_state.update(menu_state="Rekomendasi"))
+        if st.button("📊 Evaluasi Model", use_container_width=True):
+            st.session_state.menu_state = "Evaluasi Model"
+            st.rerun()
+        if st.button("📈 Forecast", use_container_width=True):
+            st.session_state.menu_state = "Forecast"
+            st.rerun()
+        if st.button("📉 Statistik Deskriptif", use_container_width=True):
+            st.session_state.menu_state = "Statistik Deskriptif"
+            st.rerun()
+        if st.button("💡 Rekomendasi", use_container_width=True):
+            st.session_state.menu_state = "Rekomendasi"
+            st.rerun()
 
-    # --- Navbar + Konten ---
+    # Kolom 2: Konten Rekomendasi
     with col_content:
-        st.markdown("<div class='navbar'>Selamat Datang</div>", unsafe_allow_html=True)
         st.subheader("💡 Rekomendasi")
         st.write("Konten rekomendasi muncul di sini...")
 
 else:
     col_menu, col_plot, col_table = st.columns([1, 3, 2])
 
-    # --- Kolom Menu ---
+    # Kolom 1: Menu
     with col_menu:
         st.markdown("### 📂 Menu")
-        st.button("📊 Evaluasi Model", use_container_width=True, key="eval",
-                  on_click=lambda: st.session_state.update(menu_state="Evaluasi Model"))
-        st.button("📈 Forecast", use_container_width=True, key="forecast",
-                  on_click=lambda: st.session_state.update(menu_state="Forecast"))
-        st.button("📉 Statistik Deskriptif", use_container_width=True, key="stats",
-                  on_click=lambda: st.session_state.update(menu_state="Statistik Deskriptif"))
-        st.button("💡 Rekomendasi", use_container_width=True, key="rekom",
-                  on_click=lambda: st.session_state.update(menu_state="Rekomendasi"))
+        if st.button("📊 Evaluasi Model", use_container_width=True):
+            st.session_state.menu_state = "Evaluasi Model"
+            st.rerun()
+        if st.button("📈 Forecast", use_container_width=True):
+            st.session_state.menu_state = "Forecast"
+            st.rerun()
+        if st.button("📉 Statistik Deskriptif", use_container_width=True):
+            st.session_state.menu_state = "Statistik Deskriptif"
+            st.rerun()
+        if st.button("💡 Rekomendasi", use_container_width=True):
+            st.session_state.menu_state = "Rekomendasi"
+            st.rerun()
 
-    # --- Navbar ---
+    # Kolom 2: Konten Plot / Visualisasi
     with col_plot:
-        st.markdown("<div class='navbar'>Selamat Datang</div>", unsafe_allow_html=True)
-
-        # Konten plot / visualisasi
         st.subheader(f"📌 {st.session_state.menu_state}")
         if st.session_state.menu_state == "Evaluasi Model":
             st.write("Plot hasil evaluasi model di sini.")
@@ -113,8 +112,7 @@ else:
         elif st.session_state.menu_state == "Statistik Deskriptif":
             st.write("Visualisasi statistik data di sini.")
 
-    # --- Kolom Tabel ---
+    # Kolom 3: Tabel
     with col_table:
         st.subheader("📊 Tabel")
         st.write("Tabel data, hasil forecast, atau evaluasi...")
-        
