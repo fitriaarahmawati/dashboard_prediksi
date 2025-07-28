@@ -94,7 +94,7 @@ st.markdown("""
             margin-bottom: 20px;
         }
         .menu-column {
-            background-color: #f0f2f6;
+            background-color: #c7a07a;
             padding: 1rem;
             border-radius: 10px;
         }
