@@ -3,10 +3,6 @@ import pandas as pd
 
 st.set_page_config(layout="wide")
 
-# Inisialisasi menu state
-if "menu_state" not in st.session_state:
-    st.session_state.menu_state = "Dashboard"
-
 # === CSS Styling ===
 st.markdown("""
     <style>
@@ -68,8 +64,12 @@ st.markdown("""
 # === Navbar atas ===
 st.markdown('<div class="navbar">Dashboard Prediksi Harga Kopi Berjangka (KC=F)</div>', unsafe_allow_html=True)
 
+# Inisialisasi menu state
+# if "menu_state" not in st.session_state:
+#     st.session_state.menu_state = "Dashboard"
+
 # === Layout fleksibel tergantung menu ===
-if st.session_state.menu_state == "Rekomendasi":
+if st.session_state.menu_state == in ["Rekomendasi", "Dashboard"]:
     col_menu, col_content = st.columns([1, 5])
 
     # Kolom 1: Menu
