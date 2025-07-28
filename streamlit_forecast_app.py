@@ -85,106 +85,67 @@ def forecast_lstm(df, params, days, scaler, model):
 # ===== Streamlit UI (Custom Layout) =====
 st.set_page_config(layout="wide")
 
+# === Tambahkan CSS agar tidak bisa scroll & layout terkunci di 1 halaman ===
 st.markdown("""
     <style>
-        html, body, [class*="css"]  {
+        html, body, [data-testid="stApp"] {
             overflow: hidden !important;
+            height: 100vh;
         }
-        .main-title {
-            font-size: 36px;
-            font-weight: bold;
-            text-align: center;
-            margin-bottom: 20px;
-            background-color: #ff0800;
-        }
-        .menu-column {
-            background-color: #e7bc91;
+
+        /* Menu styling */
+        .menu-box {
+            background-color: #ffcccc;
             padding: 1rem;
             border-radius: 10px;
             height: 100vh;
+            box-sizing: border-box;
         }
-        .section-title {
-            font-size: 20px;
-            font-weight: bold;
-            margin-bottom: 10px;
-        }
-        .button-row button {
-            width: 20px;
-            margin-bottom: 10px;
+
+        /* Hilangkan scrollbar */
+        ::-webkit-scrollbar {
+            display: none;
         }
     </style>
 """, unsafe_allow_html=True)
 
-st.markdown("<div class='main-title'>📈 Prediksi Harga</div>", unsafe_allow_html=True)
+# === Layout utama: kolom menu dan konten ===
+col_menu, col_content = st.columns([1, 3])
 
-col1, col2, col3 = st.columns([1, 3, 2])
+# === MENU SEBELAH KIRI ===
+with col_menu:
+    st.markdown("<div class='menu-box'>", unsafe_allow_html=True)
+    st.markdown("### 📂 Menu", unsafe_allow_html=True)
 
-with col1:
-    # Sisipkan div manual di atas dan bawah container
-    st.markdown("<div class='menu-column'>", unsafe_allow_html=True)
-    
-        # Gunakan container Streamlit agar semua komponen masuk ke dalam kolom ini
-        with st.container():
-            st.markdown("### 📂 Menu")
-            col_eval = st.button("Evaluasi Model", use_container_width=True)
-            col_forecast = st.button("Forecast", use_container_width=True)
-            col_stats = st.button("Statistik Deskriptif", use_container_width=True)
-            col_rekom = st.button("Rekomendasi", use_container_width=True)
-    
+    selected = None
+    if st.button("📊 Evaluasi Model", use_container_width=True):
+        selected = "evaluasi"
+    elif st.button("📈 Forecast", use_container_width=True):
+        selected = "forecast"
+    elif st.button("📉 Statistik Deskriptif", use_container_width=True):
+        selected = "statistik"
+    elif st.button("💡 Rekomendasi", use_container_width=True):
+        selected = "rekomendasi"
+
     st.markdown("</div>", unsafe_allow_html=True)
 
-# Button logic state management
-if 'menu_state' not in st.session_state:
-    st.session_state.menu_state = ""
-
-if col_eval:
-    st.session_state.menu_state = "Evaluasi Model"
-elif col_forecast:
-    st.session_state.menu_state = "Forecast"
-elif col_stats:
-    st.session_state.menu_state = "Statistik Deskriptif"
-elif col_rekom:
-    st.session_state.menu_state = "Rekomendasi"
-
-with col2:
-    model_option = st.selectbox("Pilih Model", list(best_params.keys()))
-    params = best_params[model_option]
-
-    if st.session_state.menu_state == "Evaluasi Model":
-        st.markdown("<div class='section-title'>📊 Evaluasi Model (80% Train → 20% Test)</div>", unsafe_allow_html=True)
-        y_test, y_pred, scaler, model = predict_lstm(df, params)
-        fig, ax = plt.subplots(figsize=(6, 3))
-        ax.plot(range(len(y_test)), y_test, label='Actual')
-        ax.plot(range(len(y_pred)), y_pred, label='Predicted')
-        ax.set_title("Prediksi vs Aktual (Test Set)")
-        ax.legend()
-        st.pyplot(fig)
-
-    elif st.session_state.menu_state == "Forecast":
-        st.markdown("<div class='section-title'>🔮 Forecast Ke Depan</div>", unsafe_allow_html=True)
-        days = st.number_input("Berapa hari ke depan?", min_value=1, max_value=200, value=10)
-        y_test, y_pred, scaler, model = predict_lstm(df, params)
-        forecast = forecast_lstm(df, params, days, scaler, model)
-
-        forecast_index = range(len(df), len(df) + days)
-        fig2, ax2 = plt.subplots(figsize=(6, 3))
-        ax2.plot(df['Close'], label="Historical")
-        ax2.plot(forecast_index, forecast, label="Forecast")
-        ax2.set_title(f"Forecast {days} Hari ke Depan")
-        ax2.legend()
-        st.pyplot(fig2)
-
-    elif st.session_state.menu_state == "Statistik Deskriptif":
-        st.markdown("<div class='section-title'>📈 Statistik Deskriptif Harga Kopi</div>", unsafe_allow_html=True)
-        st.write(df.describe())
-
-    elif st.session_state.menu_state == "Rekomendasi":
-        st.markdown("<div class='section-title'>📝 Rekomendasi Penelitian</div>", unsafe_allow_html=True)
-        st.markdown("""
-        - Model LSTM menunjukkan performa prediksi yang cukup baik berdasarkan metrik evaluasi.
-        - Model ini cocok digunakan untuk forecasting jangka pendek harga kopi.
-        - Untuk keperluan operasional atau strategi, perlu juga mempertimbangkan faktor-faktor eksternal seperti cuaca, panen, atau harga global.
-        """)
+# === KONTEN SEBELAH KANAN ===
+with col_content:
+    if selected == "evaluasi":
+        st.subheader("📊 Evaluasi Model")
+        st.write("Konten evaluasi model ditampilkan di sini...")
+    elif selected == "forecast":
+        st.subheader("📈 Forecast")
+        st.write("Konten forecast harga kopi ditampilkan di sini...")
+    elif selected == "statistik":
+        st.subheader("📉 Statistik Deskriptif")
+        st.write("Statistik deskriptif harga kopi...")
+    elif selected == "rekomendasi":
+        st.subheader("💡 Rekomendasi")
+        st.write("Rekomendasi berdasarkan hasil prediksi...")
+    else:
+        st.subheader("📊 Dashboard Prediksi Harga Kopi")
+        st.write("Silakan pilih salah satu menu di samping.")
 
 with col3:
     if st.session_state.menu_state == "Evaluasi Model":
