@@ -34,12 +34,24 @@ st.markdown("""
             height: 100vh;
         }
 
-        button {
-            margin-top: 0.5rem;
-        }
+        /* Hover: ubah warna latar dan teks */
         div.stButton > button:hover {
-        background-color: #dcb991;
-        color: white;
+            background-color: #dcb991;
+            color: white;
+        }
+    
+        /* Klik: hilangkan outline saat tombol difokuskan */
+        div.stButton > button:focus {
+            outline: none;
+            box-shadow: none;
+            border: none;
+        }
+    
+        /* Opsional: border normal */
+        div.stButton > button {
+            border: 1px solid transparent;
+            border-radius: 8px;
+            margin-top: 0.5rem;
         }
     </style>
 """, unsafe_allow_html=True)
