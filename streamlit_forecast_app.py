@@ -1,5 +1,6 @@
 import streamlit as st
 import pandas as pd
+from lstm import predict_lstm, forecast_lstm, plot_lstm_prediction, plot_forecast_only, lstm_pso, lstm_gs
 
 st.set_page_config(layout="wide")
 
@@ -64,6 +65,14 @@ st.markdown("""
 # === Navbar atas ===
 st.markdown('<div class="navbar">Dashboard Prediksi Harga Kopi Berjangka (KC=F)</div>', unsafe_allow_html=True)
 
+# Load data historis
+@st.cache_data
+def load_data():
+    df = pd.read_csv("data/coffee.csv", parse_dates=['Date'], index_col='Date')
+    return df
+
+df = load_data()
+
 # Inisialisasi menu state
 if "menu_state" not in st.session_state:
     st.session_state.menu_state = "Dashboard"
@@ -117,6 +126,9 @@ else:
         st.subheader(f"📌 {st.session_state.menu_state}")
         if st.session_state.menu_state == "Evaluasi Model":
             st.write("Plot hasil evaluasi model di sini.")
+            model_option = st.selectbox("Pilih Model", ["LSTM PSO", "LSTM GridSearch"], key="model_select")
+            params = lstm_pso if model_option == "LSTM PSO" else lstm_gs
+            y_true, y_pred, _, _ = predict_lstm(df, params)
         elif st.session_state.menu_state == "Forecast":
             st.write("Grafik hasil forecast ditampilkan di sini.")
         elif st.session_state.menu_state == "Statistik Deskriptif":
@@ -124,5 +136,5 @@ else:
 
     # Kolom 3: Tabel
     with col_table:
-        st.subheader("📊 Tabel")
+        # st.subheader("📊 Tabel")
         st.write("Tabel data, hasil forecast, atau evaluasi...")
