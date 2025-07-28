@@ -126,9 +126,18 @@ else:
         st.subheader(f"📌 {st.session_state.menu_state}")
         if st.session_state.menu_state == "Evaluasi Model":
             st.write("Plot hasil evaluasi model di sini.")
-            model_option = st.selectbox("Pilih Model", ["LSTM PSO", "LSTM GridSearch"], key="model_select")
-            params = lstm_pso if model_option == "LSTM PSO" else lstm_gs
+            model_choice = st.selectbox("Pilih Model", ["LSTM-PSO", "LSTM-GS"], key="eval_model")
+
+            params = lstm_pso if model_choice == "LSTM-PSO" else lstm_gs
             y_true, y_pred, _, _ = predict_lstm(df, params)
+        
+            # Plot
+            fig, ax = plt.subplots(figsize=(10, 4))
+            ax.plot(y_true, label="Aktual")
+            ax.plot(y_pred, label="Prediksi")
+            ax.set_title(f"Hasil Prediksi - {model_choice}")
+            ax.legend()
+            st.pyplot(fig)
         elif st.session_state.menu_state == "Forecast":
             st.write("Grafik hasil forecast ditampilkan di sini.")
         elif st.session_state.menu_state == "Statistik Deskriptif":
@@ -137,4 +146,24 @@ else:
     # Kolom 3: Tabel
     with col_table:
         # st.subheader("📊 Tabel")
-        st.write("Tabel data, hasil forecast, atau evaluasi...")
+        # st.write("Tabel data, hasil forecast, atau evaluasi...")
+        if st.session_state.menu_state == "Evaluasi Model":
+            st.write("Plot hasil evaluasi model di sini.")
+            params = lstm_pso if model_choice == "LSTM-PSO" else lstm_gs
+            y_true, y_pred, _, _ = predict_lstm(df, params)
+        
+            mse, rmse, mae, mape = evaluate_model(y_true, y_pred)
+        
+            # Tampilkan sebagai DataFrame
+            eval_df = pd.DataFrame({
+                "Model": [model_choice],
+                "MSE": [mse],
+                "RMSE": [rmse],
+                "MAE": [mae],
+                "MAPE": [mape]
+            })
+    st.dataframe(eval_df.style.format(precision=4))
+        elif st.session_state.menu_state == "Forecast":
+            st.write("Grafik hasil forecast ditampilkan di sini.")
+        elif st.session_state.menu_state == "Statistik Deskriptif":
+            st.write("Visualisasi statistik data di sini.")
