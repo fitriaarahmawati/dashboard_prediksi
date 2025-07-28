@@ -3,71 +3,70 @@ import pandas as pd
 
 st.set_page_config(layout="wide")
 
-# ======================= CSS Styling =======================
 st.markdown("""
-<style>
-/* Hapus scroll luar dan fix tinggi */
-html, body, [data-testid="stApp"] {
-    overflow: hidden !important;
-    height: 100vh;
-}
+    <style>
+        html, body, [data-testid="stApp"] {
+            overflow: hidden !important;
+            height: 100vh;
+        }
+        
+        /* Menu kolom kiri */
+        [data-testid="column"]:first-of-type {
+            background-color: #c22323 !important;
+            padding: 1rem;
+            border-radius: 10px;
+            height: 100vh;
+            box-sizing: border-box;
+            box-shadow: 2px 0 8px rgba(0, 0, 0, 0.15);
+        }
+        .menu-container {
+            background-color: #c22323 !important;
+            padding: 1rem;
+            border-radius: 10px;
+            height: 100vh;
+            box-sizing: border-box;
+            box-shadow: 2px 0 8px rgba(0, 0, 0, 0.15);
+            color: white;
+        }
 
-/* Kolom menu */
-.menu-box {
-    background-color: #c22323 !important;
-    padding: 1rem;
-    border-radius: 10px;
-    height: 100vh;
-    box-sizing: border-box;
-    box-shadow: 2px 0 8px rgba(0, 0, 0, 0.15);
-}
+        /* Navbar */
+        .navbar {
+            background-color: #ac8b64;
+            padding: 1rem 2rem;
+            font-size: 20px;
+            font-weight: bold;
+            border-radius: 10px;
+            margin-bottom: 1rem;
+        }
 
-/* Navbar atas */
-.navbar {
-    background-color: #ac8b64;
-    padding: 1rem 2rem;
-    font-size: 20px;
-    font-weight: bold;
-    border-radius: 10px;
-    margin-bottom: 1rem;
-    color: white;
-}
-
-/* Tombol menu */
-div.stButton > button {
-    background-color: transparent;
-    color: white;
-    border: 1px solid transparent;
-    border-radius: 8px;
-    padding: 0.5rem;
-    margin-bottom: 0.5rem;
-    width: 100%;
-    text-align: left;
-    font-weight: normal;
-    transition: 0.2s;
-}
-
-/* Hover */
-div.stButton > button:hover {
-    background-color: #dcb991 !important;
-    color: white !important;
-}
-
-/* Fokus / klik */
-div.stButton > button:focus,
-div.stButton > button:active {
-    outline: none !important;
-    box-shadow: none !important;
-    border: none !important;
-}
-
-/* Aktif */
-div.stButton[data-menu="active"] > button {
-    background-color: #dcb991 !important;
-    color: white !important;
-    font-weight: bold;
-}
-</style>
+        /* Hover: ubah warna latar dan teks */
+        div.stButton > button:hover {
+            background-color: #dcb991;
+            color: white;
+            border:none;
+        }
+    
+        /* Button: hilangkan outline saat tombol difokuskan */
+        div.stButton > button:focus,
+        div.stButton > button:active{
+            outline: none !important;
+            box-shadow: none !important;
+            border: none !important;
+            background-color: #dcb991 !important; /* jaga tetap sama saat aktif */
+            color: white !important;
+            font-weight: bold;
+        }
+    
+        /* Gaya normal tombol */
+        div.stButton > button {
+            box-shadow: 1px solid;
+            border-radius: 8px;
+            margin-top: 0.5rem;
+            background-color: transparent;
+            color: black;
+            transition: all 0.2s ease;
+        }
+    </style>
 """, unsafe_allow_html=True)
 
 # === Navbar atas ===
