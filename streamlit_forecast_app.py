@@ -68,7 +68,7 @@ st.markdown('<div class="navbar">Dashboard Prediksi Harga Kopi Berjangka (KC=F)<
 # Load data historis
 @st.cache_data
 def load_data():
-    df = pd.read_csv("data/coffee.csv", parse_dates=['Date'], index_col='Date')
+    df = pd.read_csv("data/harga_kopi.csv", parse_dates=['Date'], index_col='Date')
     return df
 
 df = load_data()
