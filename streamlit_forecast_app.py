@@ -86,40 +86,49 @@ def forecast_lstm(df, params, days, scaler, model):
 st.set_page_config(layout="wide")
 st.title("📈 Prediksi Harga Kopi - LSTM")
 
-model_option = st.selectbox("Pilih Model", list(best_params.keys()))
+menu = st.sidebar.radio("📂 Menu", ["Evaluasi Model", "Forecast", "Statistik Deskriptif", "Rekomendasi"])
+model_option = st.sidebar.selectbox("Pilih Model", list(best_params.keys()))
 params = best_params[model_option]
 
-# === Evaluasi (80 -> 20) ===
-y_test, y_pred, scaler, model = predict_lstm(df, params)
-eval_result = evaluate(y_test, y_pred)
+if menu == "Evaluasi Model":
+    st.header("📊 Evaluasi Model (80% Train → 20% Test)")
+    y_test, y_pred, scaler, model = predict_lstm(df, params)
+    eval_result = evaluate(y_test, y_pred)
+    st.write(eval_result)
 
-st.subheader("📊 Evaluasi Model (80% Train → 20% Test)")
-st.write(eval_result)
+    fig, ax = plt.subplots(figsize=(10, 3))
+    ax.plot(range(len(y_test)), y_test, label='Actual')
+    ax.plot(range(len(y_pred)), y_pred, label='Predicted')
+    ax.set_title("Prediksi vs Aktual (Test Set)")
+    ax.legend()
+    st.pyplot(fig)
 
-# Plot prediksi vs ground truth
-fig, ax = plt.subplots(figsize=(10, 3))
-ax.plot(range(len(y_test)), y_test, label='Actual')
-ax.plot(range(len(y_pred)), y_pred, label='Predicted')
-ax.set_title("Prediksi vs Aktual (Test Set)")
-ax.legend()
-st.pyplot(fig)
+elif menu == "Forecast":
+    st.header("🔮 Forecast Ke Depan")
+    days = st.sidebar.number_input("Berapa hari ke depan?", min_value=1, max_value=200, value=10)
 
-# === Forecast Dinamis ===
-st.subheader("🔮 Forecast Ke Depan")
-days = st.number_input("Berapa hari ke depan?", min_value=1, max_value=200, value=10)
+    y_test, y_pred, scaler, model = predict_lstm(df, params)
+    forecast = forecast_lstm(df, params, days, scaler, model)
 
-forecast = forecast_lstm(df, params, days, scaler, model)
+    forecast_index = range(len(df), len(df) + days)
 
-# Buat index forecast
-forecast_index = range(len(df), len(df) + days)
+    fig2, ax2 = plt.subplots(figsize=(10, 3))
+    ax2.plot(df['Close'], label="Historical")
+    ax2.plot(forecast_index, forecast, label="Forecast")
+    ax2.set_title(f"Forecast {days} Hari ke Depan")
+    ax2.legend()
+    st.pyplot(fig2)
 
-# Tampilkan Plot Forecast
-fig2, ax2 = plt.subplots(figsize=(10, 3))
-ax2.plot(df['Close'], label="Historical")
-ax2.plot(forecast_index, forecast, label="Forecast")
-ax2.set_title(f"Forecast {days} Hari ke Depan")
-ax2.legend()
-st.pyplot(fig2)
+    st.dataframe(pd.DataFrame({"Hari ke": list(range(1, days+1)), "Forecast": forecast}))
 
-# Tampilkan tabel hasil forecast
-st.dataframe(pd.DataFrame({"Hari ke": list(range(1, days+1)), "Forecast": forecast}))
+elif menu == "Statistik Deskriptif":
+    st.header("📈 Statistik Deskriptif Harga Kopi")
+    st.write(df.describe())
+
+elif menu == "Rekomendasi":
+    st.header("📝 Rekomendasi Penelitian")
+    st.markdown("""
+    - Model LSTM menunjukkan performa prediksi yang cukup baik berdasarkan metrik evaluasi.
+    - Model ini cocok digunakan untuk forecasting jangka pendek harga kopi.
+    - Untuk keperluan operasional atau strategi, perlu juga mempertimbangkan faktor-faktor eksternal seperti cuaca, panen, atau harga global.
+    """)
