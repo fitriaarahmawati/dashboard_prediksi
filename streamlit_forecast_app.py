@@ -38,7 +38,7 @@ st.markdown("""
         div.stButton > button:hover {
             background-color: #dcb991;
             color: white;
-            outline:none;
+            border:none;
         }
     
         /* Klik: hilangkan outline saat tombol difokuskan */
