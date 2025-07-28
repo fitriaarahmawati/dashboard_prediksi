@@ -123,13 +123,13 @@ with col1:
     # Sisipkan div manual di atas dan bawah container
     st.markdown("<div class='menu-column'>", unsafe_allow_html=True)
     
-    # Gunakan container Streamlit agar semua komponen masuk ke dalam kolom ini
-    with st.container():
-        st.markdown("### 📂 Menu")
-        col_eval = st.button("Evaluasi Model", use_container_width=True)
-        col_forecast = st.button("Forecast", use_container_width=True)
-        col_stats = st.button("Statistik Deskriptif", use_container_width=True)
-        col_rekom = st.button("Rekomendasi", use_container_width=True)
+        # Gunakan container Streamlit agar semua komponen masuk ke dalam kolom ini
+        with st.container():
+            st.markdown("### 📂 Menu")
+            col_eval = st.button("Evaluasi Model", use_container_width=True)
+            col_forecast = st.button("Forecast", use_container_width=True)
+            col_stats = st.button("Statistik Deskriptif", use_container_width=True)
+            col_rekom = st.button("Rekomendasi", use_container_width=True)
     
     st.markdown("</div>", unsafe_allow_html=True)
 
