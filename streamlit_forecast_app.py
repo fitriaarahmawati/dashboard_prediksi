@@ -50,6 +50,7 @@ st.markdown("""
             border: none !important;
             background-color: #dcb991 !important; /* jaga tetap sama saat aktif */
             color: white !important;
+            font-weight: bold !important;
         }
     
         /* Gaya normal tombol */
@@ -60,6 +61,7 @@ st.markdown("""
             background-color: transparent;
             color: black;
             transition: all 0.2s ease;
+            font-weight: bold;
         }
     </style>
 """, unsafe_allow_html=True)
