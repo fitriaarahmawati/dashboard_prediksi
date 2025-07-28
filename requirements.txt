@@ -1,6 +1,6 @@
 streamlit
-numpy
 pandas
-scikit-learn
-tensorflow
+numpy
 matplotlib
+scikit-learn
+tensorflow==2.12.0
