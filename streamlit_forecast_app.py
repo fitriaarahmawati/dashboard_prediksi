@@ -10,6 +10,11 @@ if "menu_state" not in st.session_state:
 # === CSS Styling ===
 st.markdown("""
     <style>
+        html, body, [data-testid="stApp"] {
+            overflow: hidden !important;
+            height: 100vh;
+        }
+        
         /* Menu kolom kiri */
         [data-testid="column"]:first-of-type {
             background-color: #c22323 !important;
@@ -30,11 +35,6 @@ st.markdown("""
             margin-bottom: 1rem;
         }
 
-        html, body, [data-testid="stApp"] {
-            overflow: hidden;
-            height: 100vh;
-        }
-
         /* Hover: ubah warna latar dan teks */
         div.stButton > button:hover {
             background-color: #dcb991;
@@ -42,7 +42,7 @@ st.markdown("""
             border:none;
         }
     
-        /* Klik: hilangkan outline saat tombol difokuskan */
+        /* Button: hilangkan outline saat tombol difokuskan */
         div.stButton > button:focus,
         div.stButton > button:active{
             outline: none !important;
