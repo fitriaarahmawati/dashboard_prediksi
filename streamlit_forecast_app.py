@@ -1,6 +1,8 @@
 import streamlit as st
 import pandas as pd
 
+st.set_page_config(layout="wide")
+
 # Inisialisasi menu state
 if "menu_state" not in st.session_state:
     st.session_state.menu_state = "Dashboard"
@@ -36,7 +38,7 @@ st.markdown("""
             margin-top: 0.5rem;
         }
         div.stButton > button:hover {
-        background-color: #ff9999;
+        background-color: #dcb991;
         color: white;
         }
     </style>
