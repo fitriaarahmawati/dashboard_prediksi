@@ -92,6 +92,7 @@ st.markdown("""
             font-weight: bold;
             text-align: center;
             margin-bottom: 20px;
+            background-color: #ff0800
         }
         .menu-column {
             background-color: #c7a07a;
