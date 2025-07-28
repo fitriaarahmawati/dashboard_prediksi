@@ -77,7 +77,7 @@ def forecast_lstm(df, params, days, scaler, model):
     for _ in range(days):
         next_val = model.predict(input_seq, verbose=0)
         forecast.append(next_val[0][0])
-        input_seq = np.append(input_seq[:, 1:, :], [[next_val]], axis=1)
+        input_seq = np.append(input_seq[:, 1:, :], next_val.reshape(1, 1, 1), axis=1)
 
     forecast = scaler.inverse_transform(np.array(forecast).reshape(-1, 1)).flatten()
     return forecast
