@@ -120,16 +120,12 @@ st.markdown("<div class='main-title'>📈 Prediksi Harga</div>", unsafe_allow_ht
 col1, col2, col3 = st.columns([1, 3, 2])
 
 with col1:
-    st.markdown("""
-        <div class='menu-column'>
-            <h3>Menu</h3>
-    """, unsafe_allow_html=True)
-    col_eval = st.button("Evaluasi Model")
-    col_forecast = st.button("Forecast")
-    col_stats = st.button("Statistik Deskriptif")
-    col_rekom = st.button("Rekomendasi")
-    st.markdown("</div>", unsafe_allow_html=True)
-    
+    with st.container():
+        st.markdown("<h3 style='margin-bottom:10px;'>📂 Menu</h3>", unsafe_allow_html=True)
+        col_eval = st.button("Evaluasi Model")
+        col_forecast = st.button("Forecast")
+        col_stats = st.button("Statistik Deskriptif")
+        col_rekom = st.button("Rekomendasi")
 
 # Button logic state management
 if 'menu_state' not in st.session_state:
