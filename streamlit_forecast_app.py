@@ -87,6 +87,9 @@ st.set_page_config(layout="wide")
 
 st.markdown("""
     <style>
+        html, body, [class*="css"]  {
+            overflow: hidden !important;
+        }
         .main-title {
             font-size: 36px;
             font-weight: bold;
