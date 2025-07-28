@@ -146,13 +146,3 @@ with col_content:
     else:
         st.subheader("📊 Dashboard Prediksi Harga Kopi")
         st.write("Silakan pilih salah satu menu di samping.")
-
-with col3:
-    if st.session_state.menu_state == "Evaluasi Model":
-        eval_result = evaluate(y_test, y_pred)
-        st.markdown("<div class='section-title'>📋 Hasil Evaluasi</div>", unsafe_allow_html=True)
-        st.dataframe(pd.DataFrame([eval_result]))
-
-    elif st.session_state.menu_state == "Forecast":
-        st.markdown("<div class='section-title'>📋 Tabel Forecast</div>", unsafe_allow_html=True)
-        st.dataframe(pd.DataFrame({"Hari ke": list(range(1, days+1)), "Forecast": forecast}))
