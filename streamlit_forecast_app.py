@@ -21,7 +21,7 @@ st.markdown("""
         .navbar {
             background-color: #ffe6e6;
             padding: 1rem 2rem;
-            font-size: 24px;
+            font-size: 16px;
             font-weight: bold;
             border-radius: 10px;
             margin-bottom: 1rem;
@@ -39,7 +39,7 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 # === Navbar atas ===
-st.markdown('<div class="navbar">Selamat Datang</div>', unsafe_allow_html=True)
+st.markdown('<div class="navbar">Dashboard Prediksi Harga Kopi Berjangka (KC=F)</div>', unsafe_allow_html=True)
 
 # === Layout fleksibel tergantung menu ===
 if st.session_state.menu_state == "Rekomendasi":
