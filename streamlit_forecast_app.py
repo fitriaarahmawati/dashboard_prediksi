@@ -19,7 +19,7 @@ st.markdown("""
 
         /* Navbar */
         .navbar {
-            background-color: #ffe6e6;
+            background-color: #ac8b64;
             padding: 1rem 2rem;
             font-size: 20px;
             font-weight: bold;
