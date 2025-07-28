@@ -130,22 +130,22 @@ with col_menu:
     # elif st.button("💡 Rekomendasi", use_container_width=True):
     #     selected = "rekomendasi"
 
-    st.markdown("</div>", unsafe_allow_html=True)
+    # st.markdown("</div>", unsafe_allow_html=True)
 
-# === KONTEN SEBELAH KANAN ===
-with col_content:
-    if selected == "evaluasi":
-        st.subheader("📊 Evaluasi Model")
-        st.write("Konten evaluasi model ditampilkan di sini...")
-    elif selected == "forecast":
-        st.subheader("📈 Forecast")
-        st.write("Konten forecast harga kopi ditampilkan di sini...")
-    elif selected == "statistik":
-        st.subheader("📉 Statistik Deskriptif")
-        st.write("Statistik deskriptif harga kopi...")
-    elif selected == "rekomendasi":
-        st.subheader("💡 Rekomendasi")
-        st.write("Rekomendasi berdasarkan hasil prediksi...")
-    else:
-        st.subheader("📊 Dashboard Prediksi Harga Kopi")
-        st.write("Silakan pilih salah satu menu di samping.")
+# # === KONTEN SEBELAH KANAN ===
+# with col_content:
+#     if selected == "evaluasi":
+#         st.subheader("📊 Evaluasi Model")
+#         st.write("Konten evaluasi model ditampilkan di sini...")
+#     elif selected == "forecast":
+#         st.subheader("📈 Forecast")
+#         st.write("Konten forecast harga kopi ditampilkan di sini...")
+#     elif selected == "statistik":
+#         st.subheader("📉 Statistik Deskriptif")
+#         st.write("Statistik deskriptif harga kopi...")
+#     elif selected == "rekomendasi":
+#         st.subheader("💡 Rekomendasi")
+#         st.write("Rekomendasi berdasarkan hasil prediksi...")
+#     else:
+#         st.subheader("📊 Dashboard Prediksi Harga Kopi")
+#         st.write("Silakan pilih salah satu menu di samping.")
