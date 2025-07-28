@@ -10,7 +10,7 @@ st.markdown("""
     <style>
         /* Menu kolom kiri */
         [data-testid="column"]:first-of-type {
-            background-color: #ffcccc;
+            background-color: #ffcccc !important;
             padding: 1rem;
             border-radius: 10px;
             height: 100vh;
@@ -34,6 +34,10 @@ st.markdown("""
 
         button {
             margin-top: 0.5rem;
+        }
+        div.stButton > button:hover {
+        background-color: #ff9999;
+        color: white;
         }
     </style>
 """, unsafe_allow_html=True)
