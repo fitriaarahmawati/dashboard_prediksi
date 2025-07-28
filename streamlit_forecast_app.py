@@ -58,6 +58,9 @@ st.markdown("""
     </style>
 """, unsafe_allow_html=True)
 
+# === Navbar atas ===
+st.markdown('<div class="navbar">Dashboard Prediksi Harga Kopi Berjangka (KC=F)</div>', unsafe_allow_html=True)
+
 # === Layout fleksibel tergantung menu ===
 if st.session_state.menu_state == "Rekomendasi":
     col_menu, col_content = st.columns([1, 5])
