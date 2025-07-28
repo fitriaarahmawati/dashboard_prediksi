@@ -158,7 +158,7 @@ else:
                 "MAE": [mae],
                 "MAPE": [mape]
             })
-    st.dataframe(eval_df.style.format(precision=4))
+            st.dataframe(eval_df.style.format(precision=4))
         elif st.session_state.menu_state == "Forecast":
             st.write("Grafik hasil forecast ditampilkan di sini.")
         elif st.session_state.menu_state == "Statistik Deskriptif":
