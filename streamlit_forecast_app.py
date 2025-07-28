@@ -1,21 +1,11 @@
 import streamlit as st
 import pandas as pd
-import numpy as np
-import matplotlib.pyplot as plt
-from sklearn.metrics import mean_squared_error, mean_absolute_error
-from math import sqrt
-from tensorflow.keras.models import Sequential
-from tensorflow.keras.layers import LSTM, Dense
-from sklearn.preprocessing import MinMaxScaler
 
-# ===== Streamlit UI (Custom Layout) =====
-import streamlit as st
-
-# Inisialisasi session state untuk navigasi
+# Inisialisasi menu state
 if "menu_state" not in st.session_state:
     st.session_state.menu_state = "Dashboard"
 
-# CSS untuk styling menu, layout, dan navbar
+# === CSS Styling ===
 st.markdown("""
     <style>
         /* Menu kolom kiri */
@@ -48,45 +38,54 @@ st.markdown("""
     </style>
 """, unsafe_allow_html=True)
 
-# === Baris 1: Judul/Navbar (di atas kolom 2 dan 3) ===
+# === Navbar atas ===
 st.markdown('<div class="navbar">Selamat Datang</div>', unsafe_allow_html=True)
 
-# === Baris 2: Layout fleksibel tergantung menu ===
+# === Layout fleksibel tergantung menu ===
 if st.session_state.menu_state == "Rekomendasi":
-    # Hanya dua kolom: Menu + Konten
     col_menu, col_content = st.columns([1, 5])
+
+    # Kolom 1: Menu
     with col_menu:
         st.markdown("### 📂 Menu")
         if st.button("📊 Evaluasi Model", use_container_width=True):
             st.session_state.menu_state = "Evaluasi Model"
+            st.experimental_rerun()
         if st.button("📈 Forecast", use_container_width=True):
             st.session_state.menu_state = "Forecast"
+            st.experimental_rerun()
         if st.button("📉 Statistik Deskriptif", use_container_width=True):
             st.session_state.menu_state = "Statistik Deskriptif"
+            st.experimental_rerun()
         if st.button("💡 Rekomendasi", use_container_width=True):
             st.session_state.menu_state = "Rekomendasi"
+            st.experimental_rerun()
 
+    # Kolom 2: Konten Rekomendasi
     with col_content:
         st.subheader("💡 Rekomendasi")
         st.write("Konten rekomendasi muncul di sini...")
 
 else:
-    # Tiga kolom: Menu + Plot + Tabel
     col_menu, col_plot, col_table = st.columns([1, 3, 2])
 
-    # === Menu (Kolom 1) ===
+    # Kolom 1: Menu
     with col_menu:
         st.markdown("### 📂 Menu")
         if st.button("📊 Evaluasi Model", use_container_width=True):
             st.session_state.menu_state = "Evaluasi Model"
+            st.experimental_rerun()
         if st.button("📈 Forecast", use_container_width=True):
             st.session_state.menu_state = "Forecast"
+            st.experimental_rerun()
         if st.button("📉 Statistik Deskriptif", use_container_width=True):
             st.session_state.menu_state = "Statistik Deskriptif"
+            st.experimental_rerun()
         if st.button("💡 Rekomendasi", use_container_width=True):
             st.session_state.menu_state = "Rekomendasi"
+            st.experimental_rerun()
 
-    # === Konten Plot (Kolom 2) ===
+    # Kolom 2: Konten Plot / Visualisasi
     with col_plot:
         st.subheader(f"📌 {st.session_state.menu_state}")
         if st.session_state.menu_state == "Evaluasi Model":
@@ -96,7 +95,7 @@ else:
         elif st.session_state.menu_state == "Statistik Deskriptif":
             st.write("Visualisasi statistik data di sini.")
 
-    # === Konten Tabel (Kolom 3) ===
+    # Kolom 3: Tabel
     with col_table:
         st.subheader("📊 Tabel")
         st.write("Tabel data, hasil forecast, atau evaluasi...")
