@@ -20,7 +20,7 @@ st.markdown("""
     <style>
         /* Kolom pertama akan jadi kotak menu */
         [data-testid="column"]:first-of-type {
-            background-color: #ffcccc;
+            background-color: #f0f2f6;
             padding: 1rem;
             border-radius: 10px;
             height: 100vh;
