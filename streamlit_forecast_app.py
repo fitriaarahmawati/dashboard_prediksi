@@ -95,9 +95,10 @@ st.markdown("""
             background-color: #ff0800
         }
         .menu-column {
-            background-color: #c7a07a;
+            background-color: #ffcccc;
             padding: 1rem;
             border-radius: 10px;
+            height: 100vh;
         }
         .section-title {
             font-size: 20px;
@@ -116,8 +117,10 @@ st.markdown("<div class='main-title'>📈 Prediksi Harga</div>", unsafe_allow_ht
 col1, col2, col3 = st.columns([1, 3, 2])
 
 with col1:
-    st.markdown("<div class='menu-column'>", unsafe_allow_html=True)
-    st.write("### Menu")
+    st.markdown("""
+        <div class='menu-column'>
+            <h3>Menu</h3>
+    """, unsafe_allow_html=True)
     col_eval = st.button("Evaluasi Model")
     col_forecast = st.button("Forecast")
     col_stats = st.button("Statistik Deskriptif")
