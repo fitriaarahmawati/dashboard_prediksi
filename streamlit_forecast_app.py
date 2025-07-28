@@ -114,18 +114,21 @@ col_menu, col_content = st.columns([1, 3])
 
 # === MENU SEBELAH KIRI ===
 with col_menu:
-    st.markdown("<div class='menu-box'>", unsafe_allow_html=True)
-    st.markdown("### 📂 Menu", unsafe_allow_html=True)
+    st.markdown("<div class='menu-column'>", unsafe_allow_html=True)
+    menu = st.button("📂 Menu", ["Evaluasi Model", "Forecast", "Statistik Deskriptif", "Rekomendasi"])
+    st.markdown("</div>", unsafe_allow_html=True)
+    # st.markdown("<div class='menu-box'>", unsafe_allow_html=True)
+    # st.markdown("### 📂 Menu", unsafe_allow_html=True)
 
-    selected = None
-    if st.button("📊 Evaluasi Model", use_container_width=True):
-        selected = "evaluasi"
-    elif st.button("📈 Forecast", use_container_width=True):
-        selected = "forecast"
-    elif st.button("📉 Statistik Deskriptif", use_container_width=True):
-        selected = "statistik"
-    elif st.button("💡 Rekomendasi", use_container_width=True):
-        selected = "rekomendasi"
+    # selected = None
+    # if st.button("📊 Evaluasi Model", use_container_width=True):
+    #     selected = "evaluasi"
+    # elif st.button("📈 Forecast", use_container_width=True):
+    #     selected = "forecast"
+    # elif st.button("📉 Statistik Deskriptif", use_container_width=True):
+    #     selected = "statistik"
+    # elif st.button("💡 Rekomendasi", use_container_width=True):
+    #     selected = "rekomendasi"
 
     st.markdown("</div>", unsafe_allow_html=True)
 
