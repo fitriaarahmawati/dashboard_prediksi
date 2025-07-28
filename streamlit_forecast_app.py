@@ -82,53 +82,85 @@ def forecast_lstm(df, params, days, scaler, model):
     forecast = scaler.inverse_transform(np.array(forecast).reshape(-1, 1)).flatten()
     return forecast
 
-# ===== Streamlit UI =====
+# ===== Streamlit UI (Custom Layout) =====
 st.set_page_config(layout="wide")
-st.title("📈 Prediksi Harga Kopi - LSTM")
 
-menu = st.sidebar.radio("📂 Menu", ["Evaluasi Model", "Forecast", "Statistik Deskriptif", "Rekomendasi"])
-model_option = st.sidebar.selectbox("Pilih Model", list(best_params.keys()))
-params = best_params[model_option]
+st.markdown("""
+    <style>
+        .main-title {
+            font-size: 36px;
+            font-weight: bold;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .menu-column {
+            background-color: #f0f2f6;
+            padding: 1rem;
+            border-radius: 10px;
+        }
+        .section-title {
+            font-size: 20px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+    </style>
+""", unsafe_allow_html=True)
 
-if menu == "Evaluasi Model":
-    st.header("📊 Evaluasi Model (80% Train → 20% Test)")
-    y_test, y_pred, scaler, model = predict_lstm(df, params)
-    eval_result = evaluate(y_test, y_pred)
-    st.write(eval_result)
+st.markdown("<div class='main-title'>📈 Prediksi Harga</div>", unsafe_allow_html=True)
 
-    fig, ax = plt.subplots(figsize=(10, 3))
-    ax.plot(range(len(y_test)), y_test, label='Actual')
-    ax.plot(range(len(y_pred)), y_pred, label='Predicted')
-    ax.set_title("Prediksi vs Aktual (Test Set)")
-    ax.legend()
-    st.pyplot(fig)
+col1, col2, col3 = st.columns([1, 3, 2])
 
-elif menu == "Forecast":
-    st.header("🔮 Forecast Ke Depan")
-    days = st.sidebar.number_input("Berapa hari ke depan?", min_value=1, max_value=200, value=10)
+with col1:
+    st.markdown("<div class='menu-column'>", unsafe_allow_html=True)
+    menu = st.radio("📂 Menu", ["Evaluasi Model", "Forecast", "Statistik Deskriptif", "Rekomendasi"])
+    st.markdown("</div>", unsafe_allow_html=True)
 
-    y_test, y_pred, scaler, model = predict_lstm(df, params)
-    forecast = forecast_lstm(df, params, days, scaler, model)
+with col2:
+    model_option = st.selectbox("Pilih Model", list(best_params.keys()))
+    params = best_params[model_option]
 
-    forecast_index = range(len(df), len(df) + days)
+    if menu == "Evaluasi Model":
+        st.markdown("<div class='section-title'>📊 Evaluasi Model (80% Train → 20% Test)</div>", unsafe_allow_html=True)
+        y_test, y_pred, scaler, model = predict_lstm(df, params)
+        fig, ax = plt.subplots(figsize=(6, 3))
+        ax.plot(range(len(y_test)), y_test, label='Actual')
+        ax.plot(range(len(y_pred)), y_pred, label='Predicted')
+        ax.set_title("Prediksi vs Aktual (Test Set)")
+        ax.legend()
+        st.pyplot(fig)
 
-    fig2, ax2 = plt.subplots(figsize=(10, 3))
-    ax2.plot(df['Close'], label="Historical")
-    ax2.plot(forecast_index, forecast, label="Forecast")
-    ax2.set_title(f"Forecast {days} Hari ke Depan")
-    ax2.legend()
-    st.pyplot(fig2)
+    elif menu == "Forecast":
+        st.markdown("<div class='section-title'>🔮 Forecast Ke Depan</div>", unsafe_allow_html=True)
+        days = st.number_input("Berapa hari ke depan?", min_value=1, max_value=200, value=10)
+        y_test, y_pred, scaler, model = predict_lstm(df, params)
+        forecast = forecast_lstm(df, params, days, scaler, model)
 
-    st.dataframe(pd.DataFrame({"Hari ke": list(range(1, days+1)), "Forecast": forecast}))
+        forecast_index = range(len(df), len(df) + days)
+        fig2, ax2 = plt.subplots(figsize=(6, 3))
+        ax2.plot(df['Close'], label="Historical")
+        ax2.plot(forecast_index, forecast, label="Forecast")
+        ax2.set_title(f"Forecast {days} Hari ke Depan")
+        ax2.legend()
+        st.pyplot(fig2)
 
-elif menu == "Statistik Deskriptif":
-    st.header("📈 Statistik Deskriptif Harga Kopi")
-    st.write(df.describe())
+    elif menu == "Statistik Deskriptif":
+        st.markdown("<div class='section-title'>📈 Statistik Deskriptif Harga Kopi</div>", unsafe_allow_html=True)
+        st.write(df.describe())
 
-elif menu == "Rekomendasi":
-    st.header("📝 Rekomendasi Penelitian")
-    st.markdown("""
-    - Model LSTM menunjukkan performa prediksi yang cukup baik berdasarkan metrik evaluasi.
-    - Model ini cocok digunakan untuk forecasting jangka pendek harga kopi.
-    - Untuk keperluan operasional atau strategi, perlu juga mempertimbangkan faktor-faktor eksternal seperti cuaca, panen, atau harga global.
-    """)
+    elif menu == "Rekomendasi":
+        st.markdown("<div class='section-title'>📝 Rekomendasi Penelitian</div>", unsafe_allow_html=True)
+        st.markdown("""
+        - Model LSTM menunjukkan performa prediksi yang cukup baik berdasarkan metrik evaluasi.
+        - Model ini cocok digunakan untuk forecasting jangka pendek harga kopi.
+        - Untuk keperluan operasional atau strategi, perlu juga mempertimbangkan faktor-faktor eksternal seperti cuaca, panen, atau harga global.
+        """)
+
+with col3:
+    if menu == "Evaluasi Model":
+        eval_result = evaluate(y_test, y_pred)
+        st.markdown("<div class='section-title'>📋 Hasil Evaluasi</div>", unsafe_allow_html=True)
+        st.dataframe(pd.DataFrame([eval_result]))
+
+    elif menu == "Forecast":
+        st.markdown("<div class='section-title'>📋 Tabel Forecast</div>", unsafe_allow_html=True)
+        st.dataframe(pd.DataFrame({"Hari ke": list(range(1, days+1)), "Forecast": forecast}))
