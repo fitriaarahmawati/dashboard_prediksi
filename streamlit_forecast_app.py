@@ -121,7 +121,7 @@ col1, col2, col3 = st.columns([1, 3, 2])
 
 with col1:
     with st.container():
-        st.markdown("<h3 style='margin-bottom:10px;'>📂 Menu</h3>", unsafe_allow_html=True)
+        st.markdown("<div class='menu-column'>📂 Menu</h3>", unsafe_allow_html=True)
         col_eval = st.button("Evaluasi Model")
         col_forecast = st.button("Forecast")
         col_stats = st.button("Statistik Deskriptif")
