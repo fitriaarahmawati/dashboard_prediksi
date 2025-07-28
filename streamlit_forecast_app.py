@@ -43,17 +43,23 @@ st.markdown("""
         }
     
         /* Klik: hilangkan outline saat tombol difokuskan */
-        div.stButton > button:focus {
-            outline: none;
-            box-shadow: none;
-            border: none;
+        div.stButton > button:focus,
+        div.stButton > button:active{
+            outline: none !important;
+            box-shadow: none !important;
+            border: none !important;
+            background-color: #dcb991 !important; /* jaga tetap sama saat aktif */
+            color: white !important;
         }
     
-        /* Opsional: border normal */
+        /* Gaya normal tombol */
         div.stButton > button {
             border: 1px solid transparent;
             border-radius: 8px;
             margin-top: 0.5rem;
+            background-color: transparent;
+            color: black;
+            transition: all 0.2s ease;
         }
     </style>
 """, unsafe_allow_html=True)
