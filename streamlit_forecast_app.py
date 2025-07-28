@@ -146,7 +146,8 @@ else:
         if st.session_state.menu_state == "Evaluasi Model":
             st.write("Plot hasil evaluasi model di sini.")
             params = lstm_pso if model_choice == "LSTM-PSO" else lstm_gs
-            y_true, y_pred, _, _ = predict_lstm(df, params)
+            with st.spinner("Melatih dan memprediksi model..."):
+                y_true, y_pred, _, _ = predict_lstm(df, params)
         
             mse, rmse, mae, mape = evaluate_model(y_true, y_pred)
         
