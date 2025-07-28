@@ -10,7 +10,7 @@ st.markdown("""
     <style>
         /* Menu kolom kiri */
         [data-testid="column"]:first-of-type {
-            background-color: #ffcccc !important;
+            background-color: #ffcccc;
             padding: 1rem;
             border-radius: 10px;
             height: 100vh;
