@@ -105,7 +105,7 @@ st.markdown("""
             margin-bottom: 10px;
         }
         .button-row button {
-            width: 100%;
+            width: 20px;
             margin-bottom: 10px;
         }
     </style>
@@ -116,14 +116,14 @@ st.markdown("<div class='main-title'>📈 Prediksi Harga</div>", unsafe_allow_ht
 col1, col2, col3 = st.columns([1, 3, 2])
 
 with col1:
-    st.markdown("<div class='menu-column'>"
-        st.write("### Menu")
-        col_eval = st.button("Evaluasi Model")
-        col_forecast = st.button("Forecast")
-        col_stats = st.button("Statistik Deskriptif")
-        col_rekom = st.button("Rekomendasi")
-        st.markdown("</div>", unsafe_allow_html=True)
-    , unsafe_allow_html=True)
+    st.markdown("<div class='menu-column'>", unsafe_allow_html=True)
+    st.write("### Menu")
+    col_eval = st.button("Evaluasi Model")
+    col_forecast = st.button("Forecast")
+    col_stats = st.button("Statistik Deskriptif")
+    col_rekom = st.button("Rekomendasi")
+    st.markdown("</div>", unsafe_allow_html=True)
+    
 
 # Button logic state management
 if 'menu_state' not in st.session_state:
