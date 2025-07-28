@@ -69,7 +69,7 @@ st.markdown('<div class="navbar">Dashboard Prediksi Harga Kopi Berjangka (KC=F)<
 #     st.session_state.menu_state = "Dashboard"
 
 # === Layout fleksibel tergantung menu ===
-if st.session_state.menu_state == in ["Rekomendasi", "Dashboard"]:
+if st.session_state.menu_state in ["Rekomendasi", "Dashboard"]:
     col_menu, col_content = st.columns([1, 5])
 
     # Kolom 1: Menu
