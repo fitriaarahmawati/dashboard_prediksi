@@ -55,7 +55,7 @@ st.markdown("""
     
         /* Gaya normal tombol */
         div.stButton > button {
-            border: 1px solid transparent;
+            box-shadow: 1px solid;
             border-radius: 8px;
             margin-top: 0.5rem;
             background-color: transparent;
