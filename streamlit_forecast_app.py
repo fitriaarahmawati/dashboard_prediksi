@@ -120,8 +120,8 @@ st.markdown("<div class='main-title'>📈 Prediksi Harga</div>", unsafe_allow_ht
 col1, col2, col3 = st.columns([1, 3, 2])
 
 with col1:
-    with st.container():
-        st.markdown("<div class='menu-column'><h4>📂 Menu</h4>", unsafe_allow_html=True)
+    with st.container("<div class='menu-column'>", unsafe_allow_html=True):
+        st.markdown("<h4>📂 Menu</h4>", unsafe_allow_html=True)
         col_eval = st.button("Evaluasi Model", use_container_width=True)
         col_forecast = st.button("Forecast", use_container_width=True)
         col_stats = st.button("Statistik Deskriptif", use_container_width=True)
