@@ -1,6 +1,6 @@
 import streamlit as st
 import pandas as pd
-from lstm import predict_lstm, forecast_lstm, plot_lstm_prediction, plot_forecast_only, lstm_pso, lstm_gs
+from lstm import predict_lstm, forecast_lstm, plot_lstm_prediction, plot_forecast_only, lstm_pso, lstm_gs, evaluate_model
 
 st.set_page_config(layout="wide")
 
@@ -132,11 +132,7 @@ else:
             y_true, y_pred, _, _ = predict_lstm(df, params)
         
             # Plot
-            fig, ax = plt.subplots(figsize=(10, 4))
-            ax.plot(y_true, label="Aktual")
-            ax.plot(y_pred, label="Prediksi")
-            ax.set_title(f"Hasil Prediksi - {model_choice}")
-            ax.legend()
+            fig = plot_lstm_prediction(y_true, y_pred, title=f"Hasil Prediksi - {model_choice}")
             st.pyplot(fig)
         elif st.session_state.menu_state == "Forecast":
             st.write("Grafik hasil forecast ditampilkan di sini.")
