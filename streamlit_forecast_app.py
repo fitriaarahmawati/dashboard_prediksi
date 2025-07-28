@@ -103,6 +103,10 @@ st.markdown("""
             font-weight: bold;
             margin-bottom: 10px;
         }
+        .button-row button {
+            width: 100%;
+            margin-bottom: 10px;
+        }
     </style>
 """, unsafe_allow_html=True)
 
@@ -112,14 +116,31 @@ col1, col2, col3 = st.columns([1, 3, 2])
 
 with col1:
     st.markdown("<div class='menu-column'>", unsafe_allow_html=True)
-    menu = st.radio("📂 Menu", ["Evaluasi Model", "Forecast", "Statistik Deskriptif", "Rekomendasi"])
+    st.write("### Menu")
+    col_eval = st.button("Evaluasi Model")
+    col_forecast = st.button("Forecast")
+    col_stats = st.button("Statistik Deskriptif")
+    col_rekom = st.button("Rekomendasi")
     st.markdown("</div>", unsafe_allow_html=True)
+
+# Button logic state management
+if 'menu_state' not in st.session_state:
+    st.session_state.menu_state = ""
+
+if col_eval:
+    st.session_state.menu_state = "Evaluasi Model"
+elif col_forecast:
+    st.session_state.menu_state = "Forecast"
+elif col_stats:
+    st.session_state.menu_state = "Statistik Deskriptif"
+elif col_rekom:
+    st.session_state.menu_state = "Rekomendasi"
 
 with col2:
     model_option = st.selectbox("Pilih Model", list(best_params.keys()))
     params = best_params[model_option]
 
-    if menu == "Evaluasi Model":
+    if st.session_state.menu_state == "Evaluasi Model":
         st.markdown("<div class='section-title'>📊 Evaluasi Model (80% Train → 20% Test)</div>", unsafe_allow_html=True)
         y_test, y_pred, scaler, model = predict_lstm(df, params)
         fig, ax = plt.subplots(figsize=(6, 3))
@@ -129,7 +150,7 @@ with col2:
         ax.legend()
         st.pyplot(fig)
 
-    elif menu == "Forecast":
+    elif st.session_state.menu_state == "Forecast":
         st.markdown("<div class='section-title'>🔮 Forecast Ke Depan</div>", unsafe_allow_html=True)
         days = st.number_input("Berapa hari ke depan?", min_value=1, max_value=200, value=10)
         y_test, y_pred, scaler, model = predict_lstm(df, params)
@@ -143,11 +164,11 @@ with col2:
         ax2.legend()
         st.pyplot(fig2)
 
-    elif menu == "Statistik Deskriptif":
+    elif st.session_state.menu_state == "Statistik Deskriptif":
         st.markdown("<div class='section-title'>📈 Statistik Deskriptif Harga Kopi</div>", unsafe_allow_html=True)
         st.write(df.describe())
 
-    elif menu == "Rekomendasi":
+    elif st.session_state.menu_state == "Rekomendasi":
         st.markdown("<div class='section-title'>📝 Rekomendasi Penelitian</div>", unsafe_allow_html=True)
         st.markdown("""
         - Model LSTM menunjukkan performa prediksi yang cukup baik berdasarkan metrik evaluasi.
@@ -156,11 +177,11 @@ with col2:
         """)
 
 with col3:
-    if menu == "Evaluasi Model":
+    if st.session_state.menu_state == "Evaluasi Model":
         eval_result = evaluate(y_test, y_pred)
         st.markdown("<div class='section-title'>📋 Hasil Evaluasi</div>", unsafe_allow_html=True)
         st.dataframe(pd.DataFrame([eval_result]))
 
-    elif menu == "Forecast":
+    elif st.session_state.menu_state == "Forecast":
         st.markdown("<div class='section-title'>📋 Tabel Forecast</div>", unsafe_allow_html=True)
         st.dataframe(pd.DataFrame({"Hari ke": list(range(1, days+1)), "Forecast": forecast}))
