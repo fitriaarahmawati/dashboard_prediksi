@@ -50,16 +50,16 @@ if st.session_state.menu_state == "Rekomendasi":
         st.markdown("### 📂 Menu")
         if st.button("📊 Evaluasi Model", use_container_width=True):
             st.session_state.menu_state = "Evaluasi Model"
-            st.experimental_rerun()
+            st.rerun()
         if st.button("📈 Forecast", use_container_width=True):
             st.session_state.menu_state = "Forecast"
-            st.experimental_rerun()
+            st.rerun()
         if st.button("📉 Statistik Deskriptif", use_container_width=True):
             st.session_state.menu_state = "Statistik Deskriptif"
-            st.experimental_rerun()
+            st.rerun()
         if st.button("💡 Rekomendasi", use_container_width=True):
             st.session_state.menu_state = "Rekomendasi"
-            st.experimental_rerun()
+            st.rerun()
 
     # Kolom 2: Konten Rekomendasi
     with col_content:
@@ -74,16 +74,16 @@ else:
         st.markdown("### 📂 Menu")
         if st.button("📊 Evaluasi Model", use_container_width=True):
             st.session_state.menu_state = "Evaluasi Model"
-            st.experimental_rerun()
+            st.rerun()
         if st.button("📈 Forecast", use_container_width=True):
             st.session_state.menu_state = "Forecast"
-            st.experimental_rerun()
+            st.rerun()
         if st.button("📉 Statistik Deskriptif", use_container_width=True):
             st.session_state.menu_state = "Statistik Deskriptif"
-            st.experimental_rerun()
+            st.rerun()
         if st.button("💡 Rekomendasi", use_container_width=True):
             st.session_state.menu_state = "Rekomendasi"
-            st.experimental_rerun()
+            st.rerun()
 
     # Kolom 2: Konten Plot / Visualisasi
     with col_plot:
