@@ -20,6 +20,15 @@ st.markdown("""
             box-sizing: border-box;
             box-shadow: 2px 0 8px rgba(0, 0, 0, 0.15);
         }
+        .menu-container {
+            background-color: #c22323 !important;
+            padding: 1rem;
+            border-radius: 10px;
+            height: 100vh;
+            box-sizing: border-box;
+            box-shadow: 2px 0 8px rgba(0, 0, 0, 0.15);
+            color: white;
+        }
 
         /* Navbar */
         .navbar {
@@ -74,6 +83,7 @@ if st.session_state.menu_state in ["Rekomendasi", "Dashboard"]:
 
     # Kolom 1: Menu
     with col_menu:
+        st.markdown('<div class="menu-container">', unsafe_allow_html=True)
         st.markdown("### 📂 Menu")
         if st.button("📊 Evaluasi Model", use_container_width=True):
             st.session_state.menu_state = "Evaluasi Model"
@@ -87,6 +97,7 @@ if st.session_state.menu_state in ["Rekomendasi", "Dashboard"]:
         if st.button("💡 Rekomendasi", use_container_width=True):
             st.session_state.menu_state = "Rekomendasi"
             st.rerun()
+        st.markdown('</div>', unsafe_allow_html=True)
 
     # Kolom 2: Konten Rekomendasi
     with col_content:
@@ -98,6 +109,7 @@ else:
 
     # Kolom 1: Menu
     with col_menu:
+        st.markdown('<div class="menu-container">', unsafe_allow_html=True)
         st.markdown("### 📂 Menu")
         if st.button("📊 Evaluasi Model", use_container_width=True):
             st.session_state.menu_state = "Evaluasi Model"
@@ -111,6 +123,7 @@ else:
         if st.button("💡 Rekomendasi", use_container_width=True):
             st.session_state.menu_state = "Rekomendasi"
             st.rerun()
+        st.markdown('</div>', unsafe_allow_html=True)
 
     # Kolom 2: Konten Plot / Visualisasi
     with col_plot:
