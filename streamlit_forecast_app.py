@@ -63,6 +63,7 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 df = pd.read_csv("data/harga_kopi.csv")
+df = df['Close']
 
 # === Navbar atas ===
 st.markdown('<div class="navbar">Dashboard Prediksi Harga Kopi Berjangka (KC=F)</div>', unsafe_allow_html=True)
@@ -157,6 +158,5 @@ else:
             model_choice = st.selectbox("Pilih Hari", ["", "10", "15", "30", "60"], key="n_forecast")
         elif st.session_state.menu_state == "Statistik Deskriptif":
             st.write("Berikut adalah statistik deskriptif dari data harga kopi berjangka:")
-            st.dataframe(df.describe())
             desc = df.describe().round(2)
             st.dataframe(desc)
