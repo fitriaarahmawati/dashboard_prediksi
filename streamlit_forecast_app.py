@@ -11,6 +11,10 @@ st.markdown("""
             overflow: hidden !important;
             height: 100vh;
         }
+
+        body {
+            background-color: #f2f2f2;
+        }
         
         /* Menu kolom kiri */
         [data-testid="column"]:first-of-type {
@@ -67,6 +71,7 @@ df["Date"] = pd.to_datetime(df["Date"])
 df.set_index("Date", inplace=True)
 data = df['Close']
 
+# ===== UI =====
 # === Navbar atas ===
 st.markdown('<div class="navbar">Dashboard Prediksi Harga Kopi Berjangka (KC=F)</div>', unsafe_allow_html=True)
 
