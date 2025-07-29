@@ -155,7 +155,7 @@ else:
                 st.session_state.pilih_model = pilih_model
                 st.markdown("### Hasil Prediksi")
                 st.dataframe(df_evaluasi)
-            elif pilih_model and pilih_hari:
+            elif pilih_model:
                 st.warning(f"File `{file_name}` tidak ditemukan.")
             
         elif st.session_state.menu_state == "Forecast":
