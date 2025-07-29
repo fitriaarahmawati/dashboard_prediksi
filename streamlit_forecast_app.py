@@ -157,7 +157,7 @@ else:
             ).properties(
                 width=700,
                 height=400,
-                background=None  # ini menghilangkan background putih
+                background=("transparent")
             )
             
             st.altair_chart(chart, use_container_width=True)
