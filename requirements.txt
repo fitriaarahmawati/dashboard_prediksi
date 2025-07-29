@@ -3,4 +3,5 @@ pandas
 numpy
 matplotlib
 scikit-learn
+openpyxl
 tensorflow==2.12.0
