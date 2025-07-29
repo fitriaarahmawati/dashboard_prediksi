@@ -161,7 +161,7 @@ else:
                 st.session_state.pilih_model = pilih_model
                 st.session_state.pilih_hari = pilih_hari
                 st.markdown("### Tabel Forecast")
-                st.dataframe(df_forecast)
+                st.dataframe(df_forecast['Close'])
             elif pilih_model and pilih_hari:
                 st.warning(f"File `{file_name}` tidak ditemukan.")
                 
