@@ -1,6 +1,7 @@
 import streamlit as st
 import pandas as pd
 import matplotlib.pyplot as plt
+import altair as alt
 
 st.set_page_config(layout="wide")
 
@@ -149,23 +150,17 @@ else:
             st.write("Grafik hasil forecast ditampilkan di sini.")
         elif st.session_state.menu_state == "Statistik Deskriptif":
             # st.write("Data harga kopi berjangka (KC=F)")
-            # --- Buat plot dataset ---
-            fig, ax = plt.subplots(figsize=(10, 4))
-            ax.plot(df.index, df["Close"], color='darkgreen', linewidth=2)
+            # Bikin chart Altair tanpa background
+            chart = alt.Chart(df).mark_line(color="green").encode(
+                x="Date:T",
+                y="Close:Q"
+            ).properties(
+                width=700,
+                height=400,
+                background=None  # ini menghilangkan background putih
+            )
             
-            ax.set_title("Harga Penutupan Kopi Berjangka (KC=F)", fontsize=14)
-            ax.set_xlabel("Tanggal")
-            ax.set_ylabel("Harga")
-            
-            # Hapus background putih
-            fig.patch.set_facecolor('none')  # luar plot
-            ax.set_facecolor('none')         # dalam area grafik (plotting area)
-            
-            # Hapus grid putih jika ingin bersih
-            ax.grid(True, linestyle='--', alpha=0.3)
-            
-            # Tampilkan ke Streamlit
-            st.pyplot(fig)
+            st.altair_chart(chart, use_container_width=True)
 
     # Kolom 3: Tabel
     with col_table:
