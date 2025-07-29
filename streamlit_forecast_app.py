@@ -151,12 +151,13 @@ else:
         elif st.session_state.menu_state == "Statistik Deskriptif":
             # st.write("Data harga kopi berjangka (KC=F)")
             # Bikin chart Altair tanpa background
-            chart = alt.Chart(df).mark_line(color="green").encode(
-                x="Date:T",
-                y="Close:Q"
+            chart = alt.Chart(data).mark_line(color="green").encode(
+                x=alt.X("Date:T", title="Tanggal"),
+                y=alt.Y("Close:Q", title="Harga Penutupan")
             ).properties(
                 width=700,
                 height=400,
+                title="Harga Penutupan Kopi Berjangka",
                 background=("transparent")
             )
             
