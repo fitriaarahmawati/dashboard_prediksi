@@ -159,9 +159,8 @@ else:
             ).properties(
                 width=700,
                 height=400,
-                title="Harga Penutupan Kopi Berjangka"
-            ).configure_view(
-                background="transparent"  # menghilangkan background putih
+                title="Harga Penutupan Kopi Berjangka",
+                background=("transparent")
             )
             # Tampilkan chart di Streamlit
             st.altair_chart(chart, use_container_width=True)
