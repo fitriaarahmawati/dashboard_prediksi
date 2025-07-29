@@ -48,11 +48,28 @@ def load_model_and_scaler(name, model_dir="model"):
 
 """## Load evaluasi"""
 
-def load_evaluation_from_csv(csv_path="evaluasi_model.csv"):
-    if os.path.exists(csv_path):
-        return pd.read_csv(csv_path)
+def load_evaluation_from_csv(pilih model, file_path="data/evaluasi_model.csv"):
+    model_map = {
+        "LSTM-PSO": "lstm_pso",
+        "LSTM-GS": "lstm_gs",
+        "ELM-PSO": "elm_pso",
+        "ELM-GS": "elm_gs",
+        "LSTM-ELM-PSO": "lstm_elm_pso"
+    }
+
+    if not pilih_model :
+        return None
+
+    nama_model = model_map.get(pilih_model)
+
+    if os.path.exists(file_path):
+        df = pd.read_csv(file_path)
+        # Pastikan kolom tersedia
+        required_cols = ["Model", "RMSE", "MAE", "MAPE"]
+        df_filtered = df[required_cols] if all(col in df.columns for col in required_cols) else None
+        return df_filtered, file_path
     else:
-        return pd.DataFrame()  # kembalikan DataFrame kosong jika file belum ada
+        return None, file_path
 
 """## Load forecast"""
 
