@@ -65,7 +65,7 @@ st.markdown("""
     </style>
 """, unsafe_allow_html=True)
 
-df = pd.read_csv('/content/drive/My Drive/harga_kopi.csv')
+df = pd.read_csv('data/harga_kopi.csv')
 df.set_index('Date', inplace=True)
 data = df["Close"]
 
