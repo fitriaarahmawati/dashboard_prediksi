@@ -136,10 +136,7 @@ else:
     with col_plot:
         st.subheader(f"📌 {st.session_state.menu_state}")
         if st.session_state.menu_state == "Evaluasi Model":
-            st.write("Plot hasil evaluasi model di sini.")
-            model_choice = st.selectbox("Pilih Model", ["LSTM-PSO", "LSTM-GS", "ELM-PSO", "ELM-GS", "LSTM-ELM-PSO"], key="eval_model")
-
-            
+            st.write("Plot hasil evaluasi model di sini.")            
         elif st.session_state.menu_state == "Forecast":
             st.write("Grafik hasil forecast ditampilkan di sini.")
         elif st.session_state.menu_state == "Statistik Deskriptif":
@@ -151,8 +148,10 @@ else:
         # st.write("Tabel data, hasil forecast, atau evaluasi...")
         if st.session_state.menu_state == "Evaluasi Model":
             st.write("Plot hasil evaluasi model di sini.")
-            params = lstm_pso if model_choice == "LSTM-PSO" else lstm_gs
+            model_choice = st.selectbox("Pilih Model", ["LSTM-PSO", "LSTM-GS", "ELM-PSO", "ELM-GS", "LSTM-ELM-PSO"], key="eval_model")
         elif st.session_state.menu_state == "Forecast":
             st.write("Grafik hasil forecast ditampilkan di sini.")
+            model_choice = st.selectbox("Pilih Model", ["LSTM-PSO", "LSTM-GS", "ELM-PSO", "ELM-GS", "LSTM-ELM-PSO"], key="eval_model")
+            model_choice = st.selectbox("Pilih Hari", [10, 15, 30, 60], key="n_forecast
         elif st.session_state.menu_state == "Statistik Deskriptif":
             st.write("Visualisasi statistik data di sini.")
