@@ -14,7 +14,7 @@ st.markdown("""
         }
         
         /* Menu kolom kiri */
-        [data-testid="column"]{
+        [data-testid="column"] :first-of-type{
             background-color: #c22323;
             padding: 1rem;
             border-radius: 10px;
