@@ -152,6 +152,8 @@ else:
             # st.write("Data harga kopi berjangka (KC=F)")
             # Bikin chart Altair tanpa background
             dt = df[['Date', 'Close']]
+            dt["Date"] = pd.to_datetime(dt["Date"])
+            dt.set_index("Date", inplace=True)
             chart = alt.Chart(dt).mark_line(
                 color="green"
             ).encode(
