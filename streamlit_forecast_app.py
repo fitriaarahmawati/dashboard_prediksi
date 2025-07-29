@@ -149,7 +149,23 @@ else:
             st.write("Grafik hasil forecast ditampilkan di sini.")
         elif st.session_state.menu_state == "Statistik Deskriptif":
             # st.write("Data harga kopi berjangka (KC=F)")
-            st.line_chart(data)
+            # --- Buat plot dataset ---
+            fig, ax = plt.subplots(figsize=(10, 4))
+            ax.plot(df.index, df["Close"], color='darkgreen', linewidth=2)
+            
+            ax.set_title("Harga Penutupan Kopi Berjangka (KC=F)", fontsize=14)
+            ax.set_xlabel("Tanggal")
+            ax.set_ylabel("Harga")
+            
+            # Hapus background putih
+            fig.patch.set_facecolor('none')  # luar plot
+            ax.set_facecolor('none')         # dalam area grafik (plotting area)
+            
+            # Hapus grid putih jika ingin bersih
+            ax.grid(True, linestyle='--', alpha=0.3)
+            
+            # Tampilkan ke Streamlit
+            st.pyplot(fig)
 
     # Kolom 3: Tabel
     with col_table:
