@@ -175,7 +175,7 @@ else:
         if st.session_state.menu_state == "Evaluasi Model":
             st.write("Plot hasil evaluasi model di sini.")            
         elif st.session_state.menu_state == "Forecast":
-            st.write("Grafik hasil forecast ditampilkan di sini.")
+            st.subheader("Hasil Prediksi")
             
             if 'df_forecast' in locals() and df_forecast is not None:
                 df_hist = pd.read_csv("data/harga_kopi.csv", index_col=0, parse_dates=True)  # sesuaikan path
