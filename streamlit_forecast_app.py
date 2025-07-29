@@ -25,7 +25,7 @@ st.markdown("""
         /* Navbar */
         .navbar {
             background-color: #ac8b64;
-            padding: 1rem 2rem;
+            # padding: 1rem 2rem;
             font-size: 20px;
             font-weight: bold;
             border-radius: 10px;
