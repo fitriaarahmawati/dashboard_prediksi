@@ -25,7 +25,7 @@ st.markdown("""
         /* Navbar */
         .navbar {
             background-color: #ac8b64;
-            # padding: 1rem 2rem;
+            padding: 1rem 2rem;
             font-size: 20px;
             font-weight: bold;
             border-radius: 10px;
@@ -139,13 +139,13 @@ else:
             
     # Kolom 2: Konten Plot / Visualisasi
     with col_plot:
-        st.subheader(f"📌 {st.session_state.menu_state}")
+        # st.subheader(f"📌 {st.session_state.menu_state}")
         if st.session_state.menu_state == "Evaluasi Model":
             st.write("Plot hasil evaluasi model di sini.")            
         elif st.session_state.menu_state == "Forecast":
             st.write("Grafik hasil forecast ditampilkan di sini.")
         elif st.session_state.menu_state == "Statistik Deskriptif":
-            st.write("Visualisasi statistik data di sini.")
+            st.write("Data harga kopi berjangka (KC=F)")
             st.line_chart(data)
 
     # Kolom 3: Tabel
