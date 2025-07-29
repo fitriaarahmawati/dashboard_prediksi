@@ -141,26 +141,6 @@ else:
             st.session_state.menu_state = "Forecast"
             st.rerun()
             
-    # Kolom 2: Konten Plot / Visualisasi
-    with col_plot:
-        # st.subheader(f"📌 {st.session_state.menu_state}")
-        if st.session_state.menu_state == "Evaluasi Model":
-            st.write("Plot hasil evaluasi model di sini.")            
-        elif st.session_state.menu_state == "Forecast":
-            st.write("Grafik hasil forecast ditampilkan di sini.")
-            
-            if 'df_forecast' in locals() and df_forecast is not None:
-                df_hist = pd.read_csv("data/harga_kopi.csv", index_col=0, parse_dates=True)  # sesuaikan path
-                forecast_days = int(pilih_hari)
-                forecast_vals = df_forecast["Prediksi"].values
-    
-                fig = plot_forecast(df_hist, forecast_vals, forecast_days, title=f"Forecast {pilih_model} - {pilih_hari} Hari")
-                st.pyplot(fig)
-            
-        elif st.session_state.menu_state == "Statistik Deskriptif":
-            st.write("Data harga kopi berjangka (KC=F)")
-            st.line_chart(df['Close'])
-
     # Kolom 3: Tabel
     with col_table:
         # st.subheader("📊 Tabel")
@@ -186,3 +166,23 @@ else:
         elif st.session_state.menu_state == "Statistik Deskriptif":
             st.write("Statistik Deskriptif")
             st.table(data.describe().round(2))
+    
+    # Kolom 2: Konten Plot / Visualisasi
+    with col_plot:
+        # st.subheader(f"📌 {st.session_state.menu_state}")
+        if st.session_state.menu_state == "Evaluasi Model":
+            st.write("Plot hasil evaluasi model di sini.")            
+        elif st.session_state.menu_state == "Forecast":
+            st.write("Grafik hasil forecast ditampilkan di sini.")
+            
+            if 'df_forecast' in locals() and df_forecast is not None:
+                df_hist = pd.read_csv("data/harga_kopi.csv", index_col=0, parse_dates=True)  # sesuaikan path
+                forecast_days = int(pilih_hari)
+                forecast_vals = df_forecast["Prediksi"].values
+    
+                fig = plot_forecast(df_hist, forecast_vals, forecast_days, title=f"Forecast {pilih_model} - {pilih_hari} Hari")
+                st.pyplot(fig)
+            
+        elif st.session_state.menu_state == "Statistik Deskriptif":
+            st.write("Data harga kopi berjangka (KC=F)")
+            st.line_chart(df['Close'])
