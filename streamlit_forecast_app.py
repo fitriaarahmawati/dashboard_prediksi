@@ -123,7 +123,7 @@ if st.session_state.menu_state in ["Hasil Penelitian", "Dashboard"]:
             
 
 else:
-    col_menu, col_plot, col_table = st.columns([1, 3, 2])
+    col_menu, col_plot, col_table = st.columns([1, 4, 1])
 
     # Kolom 1: Menu
     with col_menu:
