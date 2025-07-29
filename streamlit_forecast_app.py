@@ -62,6 +62,8 @@ st.markdown("""
     </style>
 """, unsafe_allow_html=True)
 
+df = pd.read_csv("data/harga_kopi.csv")
+
 # === Navbar atas ===
 st.markdown('<div class="navbar">Dashboard Prediksi Harga Kopi Berjangka (KC=F)</div>', unsafe_allow_html=True)
 
@@ -154,4 +156,7 @@ else:
             model_choice = st.selectbox("Pilih Model", ["", "LSTM-PSO", "LSTM-GS", "ELM-PSO", "ELM-GS", "LSTM-ELM-PSO"], key="eval_model")
             model_choice = st.selectbox("Pilih Hari", ["", "10", "15", "30", "60"], key="n_forecast")
         elif st.session_state.menu_state == "Statistik Deskriptif":
-            st.write("Visualisasi statistik data di sini.")
+            st.write("Berikut adalah statistik deskriptif dari data harga kopi berjangka:")
+            st.dataframe(df.describe())
+            desc = df.describe().round(2)
+            st.dataframe(desc)
