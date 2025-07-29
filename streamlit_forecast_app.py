@@ -11,18 +11,6 @@ st.markdown("""
             overflow: hidden !important;
             height: 100vh;
         }
-
-        div.stButton > button.navbar-btn {
-            background-color: #2c3e50;
-            color: white;
-            font-weight: bold;
-            width: 100%;
-            border: none;
-            padding: 12px;
-            font-size: 20px;
-            border-radius: 0;
-            margin-bottom: 10px;
-        }
         
         /* Menu kolom kiri */
         [data-testid="column"]:first-of-type {
@@ -75,11 +63,7 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 # === Navbar atas ===
-col_nav = st.columns([1])[0]
-with col_nav:
-    if st.button("📊 Dashboard Prediksi Harga Kopi Berjangka (KC=F)", key="navbar_button"):
-        st.session_state.menu_state = "Dashboard"
-        st.rerun()
+st.markdown('<div class="navbar">Dashboard Prediksi Harga Kopi Berjangka (KC=F)</div>', unsafe_allow_html=True)
 
 # Inisialisasi menu state
 if "menu_state" not in st.session_state:
