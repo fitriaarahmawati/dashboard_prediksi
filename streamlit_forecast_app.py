@@ -83,44 +83,55 @@ if st.session_state.menu_state in ["Rekomendasi", "Dashboard"]:
 
     # Kolom 1: Menu
     with col_menu:
-        # st.markdown("### 📂 Menu")
-        if st.button("📉 Statistik Deskriptif", use_container_width=True):
+        # st.markdown("### Menu")
+        if st.button("Hasil Penelitian", use_container_width=True):
+            st.session_state.menu_state = "Hasil Penelitian"
+            st.rerun()
+        if st.button("Statistik Deskriptif", use_container_width=True):
             st.session_state.menu_state = "Statistik Deskriptif"
             st.rerun()
-        if st.button("💡 Rekomendasi", use_container_width=True):
-            st.session_state.menu_state = "Rekomendasi"
-            st.rerun()
-        if st.button("📊 Evaluasi Model", use_container_width=True):
+        if st.button("Evaluasi Model", use_container_width=True):
             st.session_state.menu_state = "Evaluasi Model"
             st.rerun()
-        if st.button("📈 Forecast", use_container_width=True):
+        if st.button("Forecast", use_container_width=True):
             st.session_state.menu_state = "Forecast"
             st.rerun()
 
-    # Kolom 2: Konten Rekomendasi
+    # Kolom 2: Konten Dashboard dan Hasil Penelitian
     with col_content:
-        st.subheader("💡 Rekomendasi")
-        st.write("Konten rekomendasi muncul di sini...")
+        if st.session_state.menu_state in "Dashboard":
+            # st.subheader("Dashboard")
+            st.markdown("""
+                ### 📊 Dashboard Prediksi Harga Kopi Berjangka
+                
+                Dashboard ini menyajikan beberapa hasil yang telah dilakukan dalam penelitian mengenai  
+                **prediksi harga kopi berjangka**.  
+                Silakan pilih model dan jumlah hari forecast untuk melihat hasil prediksi dan evaluasinya.
+            """)
+        if st.button("Hasil Penelitian", use_container_width=True):
+            st.session_state.menu_state = "Hasil Penelitian"
+            st.rerun()
+            
 
 else:
     col_menu, col_plot, col_table = st.columns([1, 3, 2])
 
     # Kolom 1: Menu
     with col_menu:
-        # st.markdown("### 📂 Menu")
-        if st.button("📉 Statistik Deskriptif", use_container_width=True):
+        # st.markdown("### Menu")
+        if st.button("Hasil Penelitian", use_container_width=True):
+            st.session_state.menu_state = "Hasil Penelitian"
+            st.rerun()
+        if st.button("Statistik Deskriptif", use_container_width=True):
             st.session_state.menu_state = "Statistik Deskriptif"
             st.rerun()
-        if st.button("💡 Rekomendasi", use_container_width=True):
-            st.session_state.menu_state = "Rekomendasi"
-            st.rerun()
-        if st.button("📊 Evaluasi Model", use_container_width=True):
+        if st.button("Evaluasi Model", use_container_width=True):
             st.session_state.menu_state = "Evaluasi Model"
             st.rerun()
-        if st.button("📈 Forecast", use_container_width=True):
+        if st.button("Forecast", use_container_width=True):
             st.session_state.menu_state = "Forecast"
             st.rerun()
-
+            
     # Kolom 2: Konten Plot / Visualisasi
     with col_plot:
         st.subheader(f"📌 {st.session_state.menu_state}")
