@@ -157,6 +157,5 @@ else:
             model_choice = st.selectbox("Pilih Model", ["", "LSTM-PSO", "LSTM-GS", "ELM-PSO", "ELM-GS", "LSTM-ELM-PSO"], key="eval_model")
             model_choice = st.selectbox("Pilih Hari", ["", "10", "15", "30", "60"], key="n_forecast")
         elif st.session_state.menu_state == "Statistik Deskriptif":
-            st.write("Berikut adalah statistik deskriptif dari data harga kopi berjangka:")
-            desc = df.describe().round(2)
-            st.dataframe(desc)
+            st.write("Statistik deskriptif data harga kopi berjangka:")
+            st.table(df.describe().round(2))
