@@ -148,7 +148,7 @@ else:
             st.write("Plot hasil evaluasi model di sini.")            
         elif st.session_state.menu_state == "Forecast":
             st.write("Grafik hasil forecast ditampilkan di sini.")
-
+            df_forecast, file_name = load_forecast_result(pilih_model, pilih_hari)
             if 'df_forecast' in locals() and df_forecast is not None:
                 df_hist = pd.read_csv("data/harga_kopi.csv", index_col=0, parse_dates=True)  # sesuaikan path
                 forecast_days = int(pilih_hari)
@@ -168,15 +168,14 @@ else:
         if st.session_state.menu_state == "Evaluasi Model":
             # st.write("Plot hasil evaluasi model di sini.")
             pilih_model = st.selectbox("Pilih Model", ["LSTM-PSO", "LSTM-GS", "ELM-PSO", "ELM-GS", "LSTM-ELM-PSO"], key="eval_model")
+            
         elif st.session_state.menu_state == "Forecast":
             # st.write("Grafik hasil forecast ditampilkan di sini.")
             pilih_model = st.selectbox("Pilih Model", ["", "LSTM-PSO", "LSTM-GS", "ELM-PSO", "ELM-GS", "LSTM-ELM-PSO"], key="eval_model")
             pilih_hari = st.selectbox("Pilih Hari", ["", "10", "15", "30", "60"], key="n_forecast")
-    
-            df_forecast, file_name = load_forecast_result(pilih_model, pilih_hari)
             
             if df_forecast is not None:
-                st.dataframe(df_forecast)
+                st.table(df_forecast)
             elif pilih_model and pilih_hari:
                 st.warning(f"File `{file_name}` tidak ditemukan.")
                 
