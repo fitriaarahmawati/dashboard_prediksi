@@ -96,7 +96,14 @@ if st.session_state.menu_state in ["Rekomendasi", "Dashboard"]:
             st.markdown("""
                 Dashboard ini menyajikan hasil penelitian skripsi mengenai **prediksi harga kopi berjangka**.
                 Data yang digunakan pada penelitian ini adalah data penutupan harian harga kopi berjangka periode Januari 2004 hingga Desember 2023.
+            """)
+            st.markdown("""
                 Prediksi dilakukan menggunakan metode _Long Short-Term Memory_, _Extreme Learning Machine_, dan _Hybrid_ LSTM-ELM.
+                Proses pencarian _hyperparameter_ terbaik dilakukan menggunakan metode _Grid Search_ dan _Particle Swarm Optimization_.
+            """)
+            st.markdown("""
+                _**Catatan:** Data yang digunakan merupakan data perdagangan aktif pada hari kerja (Senin–Jumat).  
+                Hari libur dan akhir pekan tidak termasuk dalam dataset karena tidak ada aktivitas pasar._
             """)
         elif st.session_state.menu_state == "Hasil Penelitian":
            st.markdown("""
