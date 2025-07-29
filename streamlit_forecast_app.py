@@ -158,4 +158,5 @@ else:
             model_choice = st.selectbox("Pilih Hari", ["", "10", "15", "30", "60"], key="n_forecast")
         elif st.session_state.menu_state == "Statistik Deskriptif":
             st.write("Statistik deskriptif data harga kopi berjangka:")
-            st.table(df.describe().round(2))
+            desc = df.describe().round(2)
+            st.table(desc)
