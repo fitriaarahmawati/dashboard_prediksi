@@ -99,7 +99,7 @@ if st.session_state.menu_state in ["Rekomendasi", "Dashboard"]:
 
     # Kolom 2: Konten Dashboard dan Hasil Penelitian
     with col_content:
-        if st.session_state.menu_state in "Dashboard":
+        if st.session_state.menu_state == "Dashboard":
             # st.subheader("Dashboard")
             st.markdown("""
                 ### 📊 Dashboard Prediksi Harga Kopi Berjangka
