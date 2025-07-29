@@ -107,10 +107,9 @@ if st.session_state.menu_state in ["Rekomendasi", "Dashboard"]:
             """)
         elif st.session_state.menu_state == "Hasil Penelitian":
            st.markdown("""
-            ### 📄 Hasil Penelitian
-    
-            Berikut ini merupakan hasil evaluasi dan visualisasi dari beberapa model prediksi  
-            yang telah dilakukan selama penelitian ini.
+                ### Hasil Penelitian
+        
+                Hasil penelitian menunjukkan bahwa 
             """)
             
 
