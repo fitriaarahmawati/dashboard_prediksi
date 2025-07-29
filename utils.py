@@ -118,7 +118,7 @@ def plot_evaluasi(y_test, y_pred, title="Prediksi vs Data Aktual"):
 
 def plot_forecast(df, forecast, forecast_days, title="Forecast Harga"):
     # plt.style.use('seaborn-darkgrid')  # <- gunakan style yang valid
-    fig, ax = plt.subplots(figsize=(12, 5))
+    fig, ax = plt.subplots(figsize=(12, 8))
 
     # Ambil data historis terakhir
     recent_data = df['Close'].values[-100:]
