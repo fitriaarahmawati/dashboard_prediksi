@@ -148,7 +148,7 @@ else:
             # st.write("Plot hasil evaluasi model di sini.")
             pilih_model = st.selectbox("Pilih Model", ["LSTM-PSO", "LSTM-GS", "ELM-PSO", "ELM-GS", "LSTM-ELM-PSO"], key="eval_model")
 
-            df_evaluasi, file_path = load_evaluation_from_csv(pilih_model, pilih_hari)
+            df_evaluasi, file_path = load_evaluation_from_csv(pilih_model)
 
             if df_evaluasi is not None:
                 st.session_state.df_forecast = df_evaluasi
