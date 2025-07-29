@@ -153,6 +153,8 @@ else:
             # st.write("Grafik hasil forecast ditampilkan di sini.")
             pilih_model = st.selectbox("Pilih Model", ["", "LSTM-PSO", "LSTM-GS", "ELM-PSO", "ELM-GS", "LSTM-ELM-PSO"], key="eval_model")
             pilih_hari = st.selectbox("Pilih Hari", ["", "10", "15", "30", "60"], key="n_forecast")
+
+            df_forecast, file_name = load_forecast_result(pilih_model, pilih_hari)
             
             if df_forecast is not None:
                 st.session_state.df_forecast = df_forecast
