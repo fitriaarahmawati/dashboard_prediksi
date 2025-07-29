@@ -117,7 +117,7 @@ def plot_evaluasi(y_test, y_pred, title="Prediksi vs Data Aktual"):
 """## Plot prediksi"""
 
 def plot_forecast(df, forecast, forecast_days, title="Forecast Harga"):
-    plt.style.use('seaborn-vcolor')
+    plt.style.use('seaborn-darkgrid')
     fig, ax = plt.subplots(figsize=(12, 5))
 
     # Ambil data historis terakhir
