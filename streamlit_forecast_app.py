@@ -65,7 +65,7 @@ st.markdown("""
     </style>
 """, unsafe_allow_html=True)
 
-df = pd.read_csv("data/harga_kopi.csv")
+df = pd.read_excel("data/harga_kopi.xlsx")
 df["Date"] = pd.to_datetime(df["Date"])
 df.set_index("Date", inplace=True)
 
