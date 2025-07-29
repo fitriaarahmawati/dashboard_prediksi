@@ -163,6 +163,8 @@ else:
             ).configure_view(
                 background="transparent"  # menghilangkan background putih
             )
+            # Tampilkan chart di Streamlit
+            st.altair_chart(chart, use_container_width=True)
 
     # Kolom 3: Tabel
     with col_table:
