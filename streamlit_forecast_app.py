@@ -145,7 +145,7 @@ else:
         elif st.session_state.menu_state == "Forecast":
             st.write("Grafik hasil forecast ditampilkan di sini.")
         elif st.session_state.menu_state == "Statistik Deskriptif":
-            st.write("Data harga kopi berjangka (KC=F)")
+            # st.write("Data harga kopi berjangka (KC=F)")
             st.line_chart(data)
 
     # Kolom 3: Tabel
@@ -160,5 +160,5 @@ else:
             model_choice = st.selectbox("Pilih Model", ["", "LSTM-PSO", "LSTM-GS", "ELM-PSO", "ELM-GS", "LSTM-ELM-PSO"], key="eval_model")
             model_choice = st.selectbox("Pilih Hari", ["", "10", "15", "30", "60"], key="n_forecast")
         elif st.session_state.menu_state == "Statistik Deskriptif":
-            st.write("Statistik deskriptif data harga kopi berjangka:")
+            st.write("Statistik Deskriptif")
             st.table(data.describe().round(2))
