@@ -10,9 +10,6 @@ st.markdown("""
         html, body, [data-testid="stApp"] {
             overflow: hidden !important;
             height: 100vh;
-        }
-
-        body {
             background-color: #f2f2f2;
         }
         
