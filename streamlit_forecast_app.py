@@ -63,9 +63,9 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 df = pd.read_csv("data/harga_kopi.csv")
-df = df["Close"]
-df.set_index('Date', inplace=True)
-df.index = pd.to_datetime(df.index)
+df["Date"] = pd.to_datetime(df["Date"])
+df.set_index("Date", inplace=True)
+data = df['Close']
 
 # === Navbar atas ===
 st.markdown('<div class="navbar">Dashboard Prediksi Harga Kopi Berjangka (KC=F)</div>', unsafe_allow_html=True)
@@ -146,7 +146,7 @@ else:
             st.write("Grafik hasil forecast ditampilkan di sini.")
         elif st.session_state.menu_state == "Statistik Deskriptif":
             st.write("Visualisasi statistik data di sini.")
-            st.line_chart(df)
+            st.line_chart(data)
 
     # Kolom 3: Tabel
     with col_table:
@@ -161,4 +161,4 @@ else:
             model_choice = st.selectbox("Pilih Hari", ["", "10", "15", "30", "60"], key="n_forecast")
         elif st.session_state.menu_state == "Statistik Deskriptif":
             st.write("Statistik deskriptif data harga kopi berjangka:")
-            st.table(df.describe().round(2))
+            st.table(data.describe().round(2))
