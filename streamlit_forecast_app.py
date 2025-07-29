@@ -68,7 +68,6 @@ st.markdown("""
 df = pd.read_csv("data/harga_kopi.csv")
 df["Date"] = pd.to_datetime(df["Date"])
 df.set_index("Date", inplace=True)
-data = df['Close']
 
 # ===== UI =====
 # === Navbar atas ===
@@ -151,10 +150,7 @@ else:
         elif st.session_state.menu_state == "Statistik Deskriptif":
             # st.write("Data harga kopi berjangka (KC=F)")
             # Bikin chart Altair tanpa background
-            dt = df[['Date', 'Close']]
-            dt["Date"] = pd.to_datetime(dt["Date"])
-            dt.set_index("Date", inplace=True)
-            chart = alt.Chart(dt).mark_line(
+            chart = alt.Chart(df).mark_line(
                 color="green"
             ).encode(
                 x=alt.X("Date:T", title="Tanggal"),
