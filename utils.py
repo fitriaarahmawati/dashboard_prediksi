@@ -81,7 +81,7 @@ def load_forecast_result(pilih_model, pilih_hari):
         return None, None
 
     nama_model = model_map.get(pilih_model)
-    nama_file = f"{nama_model}_{pilih_hari}hari.csv"
+    nama_file = os.path.join("result_forecast", f"{nama_model}_{pilih_hari}hari.csv")
 
     if os.path.exists(nama_file):
         df_forecast = pd.read_csv(nama_file)
