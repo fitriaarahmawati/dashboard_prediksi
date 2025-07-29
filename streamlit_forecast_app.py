@@ -157,11 +157,11 @@ else:
         # st.write("Tabel data, hasil forecast, atau evaluasi...")
         if st.session_state.menu_state == "Evaluasi Model":
             # st.write("Plot hasil evaluasi model di sini.")
-            model_choice = st.selectbox("Pilih Model", ["LSTM-PSO", "LSTM-GS", "ELM-PSO", "ELM-GS", "LSTM-ELM-PSO"], key="eval_model")
+            pilih_model = st.selectbox("Pilih Model", ["LSTM-PSO", "LSTM-GS", "ELM-PSO", "ELM-GS", "LSTM-ELM-PSO"], key="eval_model")
         elif st.session_state.menu_state == "Forecast":
             # st.write("Grafik hasil forecast ditampilkan di sini.")
-            model_choice = st.selectbox("Pilih Model", ["", "LSTM-PSO", "LSTM-GS", "ELM-PSO", "ELM-GS", "LSTM-ELM-PSO"], key="eval_model")
-            model_choice = st.selectbox("Pilih Hari", ["", "10", "15", "30", "60"], key="n_forecast")
+            pilih_model = st.selectbox("Pilih Model", ["", "LSTM-PSO", "LSTM-GS", "ELM-PSO", "ELM-GS", "LSTM-ELM-PSO"], key="eval_model")
+            pilih_hari = st.selectbox("Pilih Hari", ["", "10", "15", "30", "60"], key="n_forecast")
         elif st.session_state.menu_state == "Statistik Deskriptif":
             st.write("Statistik Deskriptif")
             st.table(data.describe().round(2))
