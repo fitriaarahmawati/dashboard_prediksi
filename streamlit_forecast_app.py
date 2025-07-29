@@ -65,9 +65,9 @@ st.markdown("""
     </style>
 """, unsafe_allow_html=True)
 
-df = pd.read_excel("data/harga_kopi.xlsx")
-df["Date"] = pd.to_datetime(df["Date"])
-df.set_index("Date", inplace=True)
+df = pd.read_csv('/content/drive/My Drive/harga_kopi.csv')
+df.set_index('Date', inplace=True)
+data = df["Close"]
 
 # ===== UI =====
 # === Navbar atas ===
@@ -149,20 +149,7 @@ else:
             st.write("Grafik hasil forecast ditampilkan di sini.")
         elif st.session_state.menu_state == "Statistik Deskriptif":
             # st.write("Data harga kopi berjangka (KC=F)")
-            # Bikin chart Altair tanpa background
-            chart = alt.Chart(df).mark_line(
-                color="green"
-            ).encode(
-                x=alt.X("Date:T", title="Tanggal"),
-                y=alt.Y("Close:Q", title="Harga Penutupan")
-            ).properties(
-                width=700,
-                height=300,
-                title="Harga Penutupan Kopi Berjangka",
-                background=("transparent")
-            )
-            # Tampilkan chart di Streamlit
-            st.altair_chart(chart, use_container_width=True)
+            st.line_chart(df['Close'])
 
     # Kolom 3: Tabel
     with col_table:
