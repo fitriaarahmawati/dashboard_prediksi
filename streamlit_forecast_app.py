@@ -184,6 +184,8 @@ else:
     
                 fig = plot_forecast(df_hist, forecast_vals, forecast_days, title=f"Forecast {pilih_model} - {pilih_hari} Hari")
                 st.pyplot(fig)
+            else:
+                st.write("Silakan pilih model dan jumlah hari yang akan diprediksi.")
             
         elif st.session_state.menu_state == "Statistik Deskriptif":
             st.write("Data harga kopi berjangka (KC=F)")
