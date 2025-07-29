@@ -108,9 +108,13 @@ if st.session_state.menu_state in ["Rekomendasi", "Dashboard"]:
                 **prediksi harga kopi berjangka**.  
                 Silakan pilih model dan jumlah hari forecast untuk melihat hasil prediksi dan evaluasinya.
             """)
-        if st.button("Hasil Penelitian", use_container_width=True):
-            st.session_state.menu_state = "Hasil Penelitian"
-            st.rerun()
+        elif st.session_state.menu_state == "Hasil Penelitian":
+           st.markdown("""
+            ### 📄 Hasil Penelitian
+    
+            Berikut ini merupakan hasil evaluasi dan visualisasi dari beberapa model prediksi  
+            yang telah dilakukan selama penelitian ini.
+            """)
             
 
 else:
