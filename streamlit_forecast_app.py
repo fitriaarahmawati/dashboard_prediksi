@@ -152,6 +152,6 @@ else:
         elif st.session_state.menu_state == "Forecast":
             st.write("Grafik hasil forecast ditampilkan di sini.")
             model_choice = st.selectbox("Pilih Model", ["LSTM-PSO", "LSTM-GS", "ELM-PSO", "ELM-GS", "LSTM-ELM-PSO"], key="eval_model")
-            model_choice = st.selectbox("Pilih Hari", ["10", "15", "30", "60"], key="n_forecast
+            model_choice = st.selectbox("Pilih Hari", ["10", "15", "30", "60"], key="n_forecast")
         elif st.session_state.menu_state == "Statistik Deskriptif":
             st.write("Visualisasi statistik data di sini.")
