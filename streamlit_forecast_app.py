@@ -65,14 +65,6 @@ st.markdown("""
 # === Navbar atas ===
 st.markdown('<div class="navbar">Dashboard Prediksi Harga Kopi Berjangka (KC=F)</div>', unsafe_allow_html=True)
 
-# Load data historis
-@st.cache_data
-def load_data():
-    df = pd.read_csv("data/harga_kopi.csv", parse_dates=['Date'], index_col='Date')
-    return df
-
-df = load_data()
-
 # Inisialisasi menu state
 if "menu_state" not in st.session_state:
     st.session_state.menu_state = "Dashboard"
@@ -102,11 +94,7 @@ if st.session_state.menu_state in ["Rekomendasi", "Dashboard"]:
         if st.session_state.menu_state == "Dashboard":
             # st.subheader("Dashboard")
             st.markdown("""
-                ### 📊 Dashboard Prediksi Harga Kopi Berjangka
-                
-                Dashboard ini menyajikan beberapa hasil yang telah dilakukan dalam penelitian mengenai  
-                **prediksi harga kopi berjangka**.  
-                Silakan pilih model dan jumlah hari forecast untuk melihat hasil prediksi dan evaluasinya.
+                Dashboard ini menyajikan hasil penelitian skripsi mengenai **prediksi harga kopi berjangka**. Data yang digunakan pada penelitian ini adalah data penutupan harian harga kopi berjangka periode Januari 2004 hingga Desember 2023
             """)
         elif st.session_state.menu_state == "Hasil Penelitian":
            st.markdown("""
@@ -141,14 +129,9 @@ else:
         st.subheader(f"📌 {st.session_state.menu_state}")
         if st.session_state.menu_state == "Evaluasi Model":
             st.write("Plot hasil evaluasi model di sini.")
-            model_choice = st.selectbox("Pilih Model", ["LSTM-PSO", "LSTM-GS"], key="eval_model")
+            model_choice = st.selectbox("Pilih Model", ["LSTM-PSO", "LSTM-GS", "ELM-PSO", "ELM-GS", "LSTM-ELM-PSO"], key="eval_model")
 
-            params = lstm_pso if model_choice == "LSTM-PSO" else lstm_gs
-            y_true, y_pred, _, _ = predict_lstm(df, params)
-        
-            # Plot
-            fig = plot_lstm_prediction(y_true, y_pred, title=f"Hasil Prediksi - {model_choice}")
-            st.pyplot(fig)
+            
         elif st.session_state.menu_state == "Forecast":
             st.write("Grafik hasil forecast ditampilkan di sini.")
         elif st.session_state.menu_state == "Statistik Deskriptif":
@@ -161,20 +144,6 @@ else:
         if st.session_state.menu_state == "Evaluasi Model":
             st.write("Plot hasil evaluasi model di sini.")
             params = lstm_pso if model_choice == "LSTM-PSO" else lstm_gs
-            with st.spinner("Melatih dan memprediksi model..."):
-                y_true, y_pred, _, _ = predict_lstm(df, params)
-        
-            mse, rmse, mae, mape = evaluate_model(y_true, y_pred)
-        
-            # Tampilkan sebagai DataFrame
-            eval_df = pd.DataFrame({
-                "Model": [model_choice],
-                "MSE": [mse],
-                "RMSE": [rmse],
-                "MAE": [mae],
-                "MAPE": [mape]
-            })
-            st.dataframe(eval_df.style.format(precision=4))
         elif st.session_state.menu_state == "Forecast":
             st.write("Grafik hasil forecast ditampilkan di sini.")
         elif st.session_state.menu_state == "Statistik Deskriptif":
