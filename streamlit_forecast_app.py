@@ -14,13 +14,14 @@ st.markdown("""
         }
         
         /* Menu kolom kiri */
-        [data-testid="column"]:first-of-type {
-            background-color: #c22323 !important;
+        [data-testid="column"]{
+            background-color: #c22323;
             padding: 1rem;
             border-radius: 10px;
             height: 100vh;
             box-sizing: border-box;
             box-shadow: 2px 0 8px rgba(0, 0, 0, 0.15);
+            
         }
 
         /* Navbar */
