@@ -70,7 +70,7 @@ if "menu_state" not in st.session_state:
     st.session_state.menu_state = "Dashboard"
 
 # === Layout fleksibel tergantung menu ===
-if st.session_state.menu_state in ["Rekomendasi", "Dashboard"]:
+if st.session_state.menu_state in ["Hasil Penelitian", "Dashboard"]:
     col_menu, col_content = st.columns([1, 5])
 
     # Kolom 1: Menu
