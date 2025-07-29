@@ -148,7 +148,7 @@ else:
         elif st.session_state.menu_state == "Forecast":
             st.write("Grafik hasil forecast ditampilkan di sini.")
         elif st.session_state.menu_state == "Statistik Deskriptif":
-            # st.write("Data harga kopi berjangka (KC=F)")
+            st.write("Data harga kopi berjangka (KC=F)")
             st.line_chart(df['Close'])
 
     # Kolom 3: Tabel
