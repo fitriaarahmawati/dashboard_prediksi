@@ -57,7 +57,7 @@ def load_evaluation_from_csv(pilih_model, file_path="data/evaluasi_model.csv"):
     }
     
     if not pilih_model :
-        return None
+        return None, file_path
 
     nama_model = model_map.get(pilih_model)
 
