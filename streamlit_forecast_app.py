@@ -146,7 +146,7 @@ else:
         # st.subheader("📊 Tabel")
         if st.session_state.menu_state == "Evaluasi Model":
             # st.write("Plot hasil evaluasi model di sini.")
-            pilih_model = st.selectbox("Pilih Model", ["", "LSTM-PSO", "ELM-PSO", "LSTM-ELM-PSO"], key="eval_model")
+            pilih_model = st.selectbox("Pilih Model", ["", "LSTM-PSO", "ELM-PSO", "LSTM-ELM-PSO", "ARIMA"], key="eval_model")
 
             df_evaluasi, file_path = load_evaluation_from_csv(pilih_model)
 
@@ -160,7 +160,7 @@ else:
             
         elif st.session_state.menu_state == "Forecast":
             # st.write("Grafik hasil forecast ditampilkan di sini.")
-            pilih_model = st.selectbox("Pilih Model", ["", "LSTM-PSO", "ELM-PSO", "LSTM-ELM-PSO"], key="eval_model")
+            pilih_model = st.selectbox("Pilih Model", ["", "LSTM-PSO", "ELM-PSO", "LSTM-ELM-PSO", "ARIMA"], key="eval_model")
             pilih_hari = st.selectbox("Jumlah hari", ["", "10", "15"], key="n_forecast")
 
             df_forecast, file_name = load_forecast_result(pilih_model, pilih_hari)
