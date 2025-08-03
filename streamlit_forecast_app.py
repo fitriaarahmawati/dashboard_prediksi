@@ -71,6 +71,7 @@ df.set_index('Date', inplace=True)
 data = df["Close"]
 
 # ===== UI =====
+st.set_page_config(page_title="Dashboard", layout="wide")
 # === Navbar atas ===
 st.markdown('<div class="navbar">Dashboard Prediksi Harga Kopi Berjangka (KC=F)</div>', unsafe_allow_html=True)
 
