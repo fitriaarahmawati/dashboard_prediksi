@@ -111,29 +111,25 @@ def load_forecast_result(pilih_model, pilih_hari):
 
 """## Plot evaluasi"""
 
-def plot_evaluasi(y_test, y_pred, title="Prediksi vs Data Aktual"):
+def plot_evaluasi(model_name, base_folder="gambar_evaluasi"):
     """
-    Menampilkan plot hasil prediksi dibandingkan dengan data aktual.
+    Mengembalikan gambar evaluasi dari file PNG berdasarkan nama model.
 
     Parameters:
-    - y_test: nilai aktual
-    - y_pred: hasil prediksi
-    - title: judul plot
+    - model_name: nama model (e.g., "lstm_pso", "elm_pso", dll.)
+    - base_folder: folder tempat menyimpan gambar
+
+    Returns:
+    - objek gambar PIL jika ditemukan, else None
     """
+    filename = f"plot_{model_name}.png"
+    image_path = os.path.join(base_folder, filename)
 
-    plt.style.use('seaborn-vcolor')
-    plt.figure(figsize=(12, 5))
-    plt.plot(y_test, label='Aktual', color='#2c3e50')
-    plt.plot(y_pred, label='Prediksi', linestyle='--', color='#e74c3c')
-    plt.title(title, fontsize=14, fontweight='bold')
-    plt.xlabel("Waktu")
-    plt.ylabel("Harga")
-    plt.legend()
-    plt.grid(True, linestyle='--', alpha=0.3)
-    plt.tight_layout()
-
-    return plt.gcf()
-
+    if os.path.exists(image_path):
+        return Image.open(image_path)
+    else:
+        return None
+        
 """## Plot prediksi"""
 
 def plot_forecast(df, forecast, forecast_days, title="Forecast Harga"):
