@@ -63,10 +63,15 @@ def load_evaluation_from_csv(pilih_model, file_path="data/evaluasi_model.csv"):
 
     if os.path.exists(file_path):
         df = pd.read_csv(file_path)
+        
         # Pastikan kolom tersedia
         required_cols = ["Model", "RMSE", "MAE", "MAPE"]
-        df_filtered = df[required_cols] if all(col in df.columns for col in required_cols) else None
-        return df_filtered, file_path
+        if all(col in df.columns for col in required_cols):
+            df_filtered = df[df["Model"].str.lower() == nama_model]
+            df_selected = df_filtered[["RMSE", "MAE", "MAPE"]]
+            return df_selected, file_path
+        else:
+            return None, file_path
     else:
         return None, file_path
 
