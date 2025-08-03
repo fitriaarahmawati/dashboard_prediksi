@@ -50,9 +50,9 @@ def load_model_and_scaler(name, model_dir="model"):
 
 def load_evaluation_from_csv(pilih_model, file_path="data/evaluasi_model.csv"):
     model_map = {
-        "LSTM-PSO": "lstm",
-        "ELM-PSO": "elm",
-        "LSTM-ELM-PSO": "hybrid",
+        "LSTM-PSO": "lstm_pso",
+        "ELM-PSO": "elm_pso",
+        "LSTM-ELM-PSO": "hybrid_pso",
         "ARIMA": "arima"
     }
     
