@@ -109,7 +109,7 @@ if st.session_state.menu_state in ["Hasil Penelitian", "Dashboard"]:
             """)
             st.markdown("""
                 Prediksi dilakukan menggunakan metode _Long Short-Term Memory_, _Extreme Learning Machine_, dan _Hybrid_ LSTM-ELM.
-                Proses pencarian _hyperparameter_ terbaik dilakukan menggunakan metode _Grid Search_ dan _Particle Swarm Optimization_.
+                Proses pencarian hiperparameter terbaik dilakukan menggunakan metode _Particle Swarm Optimization_.
             """)
             st.markdown("""
                 _**Catatan:** Data yang digunakan merupakan data perdagangan aktif pada hari kerja (Senin–Jumat).  
