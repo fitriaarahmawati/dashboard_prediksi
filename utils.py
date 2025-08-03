@@ -50,11 +50,9 @@ def load_model_and_scaler(name, model_dir="model"):
 
 def load_evaluation_from_csv(pilih_model, file_path="data/evaluasi_model.csv"):
     model_map = {
-        "LSTM-PSO": "lstm_pso",
-        "LSTM-GS": "lstm_gs",
-        "ELM-PSO": "elm_pso",
-        "ELM-GS": "elm_gs",
-        "LSTM-ELM-PSO": "lstm_elm_pso"
+        "LSTM-PSO": "lstm",
+        "ELM-PSO": "elm",
+        "LSTM-ELM-PSO": "hybrid"
     }
 
     if not pilih_model :
@@ -86,19 +84,17 @@ def load_forecast_result(pilih_model, pilih_hari):
     - pd.DataFrame: DataFrame hasil forecast jika file ditemukan
     - None: jika file tidak ditemukan
     """
-    model_map = {
-        "LSTM-PSO": "lstm_pso",
-        "LSTM-GS": "lstm_gs",
-        "ELM-PSO": "elm_pso",
-        "ELM-GS": "elm_gs",
-        "LSTM-ELM-PSO": "lstm_elm_pso"
+     model_map = {
+        "LSTM-PSO": "lstm",
+        "ELM-PSO": "elm",
+        "LSTM-ELM-PSO": "hybrid"
     }
 
     if not pilih_model or not pilih_hari:
         return None, None
 
     nama_model = model_map.get(pilih_model)
-    nama_file = os.path.join("result_forecast", f"{nama_model}_{pilih_hari}hari.csv")
+    nama_file = os.path.join("result_forecast", f"forecast_{nama_model}_{pilih_hari}hari.csv")
 
     if os.path.exists(nama_file):
         df_forecast = pd.read_csv(nama_file)
