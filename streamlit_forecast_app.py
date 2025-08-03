@@ -157,8 +157,6 @@ else:
                     df_evaluasi = df_evaluasi[["RMSE", "MAE", "MAPE"]]  # Hanya tampilkan kolom yang kamu mau
                     st.markdown(f"### Hasil Evaluasi")
                     st.dataframe(df_evaluasi, use_container_width=True)
-            else:
-                st.info("Silakan pilih model terlebih dahulu.")
     
         elif st.session_state.menu_state == "Forecast":
             pilih_model_forecast = st.selectbox(
@@ -201,6 +199,8 @@ else:
                         st.image(image, caption=f"Plot Evaluasi: {pilih_model_eval}", use_container_width=True)
                     else:
                         st.warning(f"Plot gambar untuk model `{pilih_model_eval}` tidak ditemukan.")
+            else:
+                st.info("Silakan pilih model terlebih dahulu.")
     
         elif st.session_state.menu_state == "Forecast":
             st.subheader("Hasil Prediksi")
