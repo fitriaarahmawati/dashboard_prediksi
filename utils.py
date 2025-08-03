@@ -68,7 +68,7 @@ def load_evaluation_from_csv(pilih_model, file_path="data/evaluasi_model.csv"):
         required_cols = ["Model", "RMSE", "MAE", "MAPE"]
         if all(col in df.columns for col in required_cols):
             df_filtered = df[df["Model"].str.lower() == nama_model]
-            df_selected = df_filtered[["RMSE", "MAE", "MAPE"]]
+            df_selected = df_filtered[["RMSE", "MAE", "MAPE"]].reset_index(drop=True)
             return df_selected, file_path
         else:
             return None, file_path
