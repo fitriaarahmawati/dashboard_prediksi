@@ -52,9 +52,10 @@ def load_evaluation_from_csv(pilih_model, file_path="data/evaluasi_model.csv"):
     model_map = {
         "LSTM-PSO": "lstm",
         "ELM-PSO": "elm",
-        "LSTM-ELM-PSO": "hybrid"
+        "LSTM-ELM-PSO": "hybrid",
+        "ARIMA": "arima"
     }
-
+    
     if not pilih_model :
         return None
 
@@ -87,7 +88,8 @@ def load_forecast_result(pilih_model, pilih_hari):
     model_map = {
         "LSTM-PSO": "lstm",
         "ELM-PSO": "elm",
-        "LSTM-ELM-PSO": "hybrid"
+        "LSTM-ELM-PSO": "hybrid",
+        "ARIMA": "arima"
     }
 
     if not pilih_model or not pilih_hari:
