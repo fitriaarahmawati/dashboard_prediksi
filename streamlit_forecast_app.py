@@ -187,40 +187,40 @@ else:
     
     # Kolom 2: Konten Plot / Visualisasi
     with col_plot:
-        # st.subheader(f"📌 {st.session_state.menu_state}")
         if st.session_state.menu_state == "Evaluasi Model":
-            pilih_model = st.session_state.get("pilih_model", None)
-
-            model_map = {
-                "LSTM-PSO": "lstm",
-                "ELM-PSO": "elm",
-                "LSTM-ELM-PSO": "hybrid",
-                "ARIMA": "arima"
-            }
-    
-            nama_model = model_map.get(pilih_model)
-    
-            if nama_model:
-                image = plot_evaluasi(nama_model)
-                if image:
-                    st.image(image, caption=f"Plot Evaluasi: {pilih_model}", use_column_width=True)
-                else:
-                    st.warning(f"Plot gambar untuk model `{pilih_model}` tidak ditemukan.")
-            else:
-                st.info("Silakan pilih model terlebih dahulu.")      
+            pilih_model = st.session_state.get("eval_model", "")
             
+            if pilih_model:  # hanya jika sudah memilih model
+                model_map = {
+                    "LSTM-PSO": "lstm",
+                    "ELM-PSO": "elm",
+                    "LSTM-ELM-PSO": "hybrid",
+                    "ARIMA": "arima"
+                }
+    
+                nama_model = model_map.get(pilih_model)
+                if nama_model:
+                    image = plot_evaluasi(nama_model)
+                    if image:
+                        st.image(image, caption=f"Plot Evaluasi: {pilih_model}", use_column_width=True)
+                    else:
+                        st.warning(f"Plot gambar untuk model `{pilih_model}` tidak ditemukan.")
+            else:
+                st.info("Silakan pilih model terlebih dahulu.")
+    
         elif st.session_state.menu_state == "Forecast":
             st.subheader("Hasil Prediksi")
-            if 'df_forecast' in locals() and df_forecast is not None:
-                df_hist = pd.read_csv("data/harga_kopi.csv", index_col=0, parse_dates=True)  # sesuaikan path
-                forecast_days = int(pilih_hari)
-                forecast_vals = df_forecast["Prediksi"].values
+            if st.session_state.get("df_forecast") is not None:
+                df_hist = pd.read_csv("data/harga_kopi.csv", index_col=0, parse_dates=True)
+                forecast_days = int(st.session_state.get("pilih_hari", 0))
+                forecast_vals = st.session_state.df_forecast["Prediksi"].values
     
-                fig = plot_forecast(df_hist, forecast_vals, forecast_days, title=f"Forecast {pilih_model} - {pilih_hari} Hari")
+                fig = plot_forecast(df_hist, forecast_vals, forecast_days,
+                                    title=f"Forecast {st.session_state.pilih_model} - {st.session_state.pilih_hari} Hari")
                 st.pyplot(fig)
             else:
                 st.info("Silakan pilih model dan jumlah hari yang akan diprediksi.")
-            
+                
         elif st.session_state.menu_state == "Statistik Deskriptif":
             st.subheader("Dataset")
             st.line_chart(df['Close'])
