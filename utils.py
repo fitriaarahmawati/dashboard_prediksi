@@ -16,6 +16,7 @@ import pandas as pd
 from sklearn.metrics import mean_squared_error, mean_absolute_error, mean_absolute_percentage_error
 from tensorflow.keras.models import load_model
 import matplotlib.pyplot as plt
+from PIL import Image
 
 """## Load data"""
 
