@@ -146,8 +146,8 @@ else:
         # st.subheader("📊 Tabel")
         if st.session_state.menu_state == "Evaluasi Model":
             # st.write("Plot hasil evaluasi model di sini.")
-            st.session_state.eval_model = ""
-            st.session_state.pilih_model = ""
+            if "eval_model" in st.session_state and st.session_state.eval_model != "":
+                st.session_state.eval_model = ""
         
             pilih_model = st.selectbox(
                 "Pilih Model",
