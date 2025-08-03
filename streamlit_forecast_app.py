@@ -156,7 +156,7 @@ else:
                 st.markdown("### Hasil Prediksi")
                 st.dataframe(df_evaluasi)
             elif pilih_model:
-                st.warning(f"File `{file_name}` tidak ditemukan.")
+                st.warning(f"File `{file_path}` tidak ditemukan.")
             
         elif st.session_state.menu_state == "Forecast":
             # st.write("Grafik hasil forecast ditampilkan di sini.")
