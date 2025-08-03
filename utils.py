@@ -84,7 +84,7 @@ def load_forecast_result(pilih_model, pilih_hari):
     - pd.DataFrame: DataFrame hasil forecast jika file ditemukan
     - None: jika file tidak ditemukan
     """
-     model_map = {
+    model_map = {
         "LSTM-PSO": "lstm",
         "ELM-PSO": "elm",
         "LSTM-ELM-PSO": "hybrid"
