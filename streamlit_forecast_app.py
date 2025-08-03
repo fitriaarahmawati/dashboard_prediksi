@@ -189,9 +189,9 @@ else:
             pilih_model = st.session_state.get("pilih_model", None)
 
             model_map = {
-                "LSTM-PSO": "lstm_pso",
-                "ELM-PSO": "elm_pso",
-                "LSTM-ELM-PSO": "hybrid_pso",
+                "LSTM-PSO": "lstm",
+                "ELM-PSO": "elm",
+                "LSTM-ELM-PSO": "hybrid",
                 "ARIMA": "arima"
             }
     
