@@ -146,19 +146,22 @@ else:
         # st.subheader("📊 Tabel")
         if st.session_state.menu_state == "Evaluasi Model":
             # st.write("Plot hasil evaluasi model di sini.")
-            if "eval_model" not in st.session_state or st.session_state.menu_state != "Evaluasi Model":
+            if "eval_model" in st.session_state and st.session_state.eval_model != "":
                 st.session_state.eval_model = ""
-            pilih_model = st.selectbox("Pilih Model", ["", "LSTM-PSO", "ELM-PSO", "LSTM-ELM-PSO", "ARIMA"], key="eval_model")
-
+        
+            pilih_model = st.selectbox(
+                "Pilih Model",
+                ["", "LSTM-PSO", "ELM-PSO", "LSTM-ELM-PSO", "ARIMA"],
+                key="eval_model"
+            )
+        
             df_evaluasi, file_path = load_evaluation_from_csv(pilih_model)
-
+        
             if df_evaluasi is not None and not df_evaluasi.empty:
                 st.session_state.df_forecast = df_evaluasi
                 st.session_state.pilih_model = pilih_model
-                st.markdown("### Hasil Evaluasi")
+                st.markdown(f"### Hasil Evaluasi untuk {pilih_model}")
                 st.dataframe(df_evaluasi)
-            elif pilih_model:
-                st.warning(f"File `{file_path}` tidak ditemukan.")
             
         elif st.session_state.menu_state == "Forecast":
             # st.write("Grafik hasil forecast ditampilkan di sini.")
@@ -187,15 +190,13 @@ else:
         # st.subheader(f"📌 {st.session_state.menu_state}")
         if st.session_state.menu_state == "Evaluasi Model":
             pilih_model = st.session_state.get("pilih_model", "")
-
+    
             model_map = {
-                "LSTM-PSO": "lstm",
-                "ELM-PSO": "elm",
-                "LSTM-ELM-PSO": "hybrid",
+                "LSTM-PSO": "lstm_pso",
+                "ELM-PSO": "elm_pso",
+                "LSTM-ELM-PSO": "hybrid_pso",
                 "ARIMA": "arima"
             }
-    
-            nama_model = model_map.get(pilih_model)
     
             if pilih_model and pilih_model in model_map:
                 nama_model = model_map[pilih_model]
