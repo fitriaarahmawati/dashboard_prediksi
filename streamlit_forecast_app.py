@@ -186,9 +186,7 @@ else:
     with col_plot:
         # st.subheader(f"📌 {st.session_state.menu_state}")
         if st.session_state.menu_state == "Evaluasi Model":
-            if "eval_model" not in st.session_state or st.session_state.menu_state != "Evaluasi Model":
-                st.session_state.eval_model = ""
-            pilih_model = st.session_state.get("pilih_model", None)
+            pilih_model = st.session_state.get("pilih_model", "")
 
             model_map = {
                 "LSTM-PSO": "lstm",
