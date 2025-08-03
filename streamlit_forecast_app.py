@@ -162,7 +162,9 @@ else:
             
         elif st.session_state.menu_state == "Forecast":
             # st.write("Grafik hasil forecast ditampilkan di sini.")
-            pilih_model = st.selectbox("Pilih Model", ["", "LSTM-PSO", "ELM-PSO", "LSTM-ELM-PSO", "ARIMA"], key="eval_model")
+            if "pilih_model" not in st.session_state or st.session_state.menu_state != "Forecast":
+                st.session_state.eval_model = ""
+            pilih_model = st.selectbox("Pilih Model", ["", "LSTM-PSO", "ELM-PSO", "LSTM-ELM-PSO", "ARIMA"], key="pilih_model")
             pilih_hari = st.selectbox("Jumlah hari", ["", "10", "15"], key="n_forecast")
 
             df_forecast, file_name = load_forecast_result(pilih_model, pilih_hari)
