@@ -146,6 +146,8 @@ else:
         # st.subheader("📊 Tabel")
         if st.session_state.menu_state == "Evaluasi Model":
             # st.write("Plot hasil evaluasi model di sini.")
+            if "eval_model" not in st.session_state or st.session_state.menu_state != "Evaluasi Model":
+                st.session_state.eval_model = ""
             pilih_model = st.selectbox("Pilih Model", ["", "LSTM-PSO", "ELM-PSO", "LSTM-ELM-PSO", "ARIMA"], key="eval_model")
 
             df_evaluasi, file_path = load_evaluation_from_csv(pilih_model)
