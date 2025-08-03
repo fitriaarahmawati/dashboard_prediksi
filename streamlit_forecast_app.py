@@ -186,7 +186,25 @@ else:
     with col_plot:
         # st.subheader(f"📌 {st.session_state.menu_state}")
         if st.session_state.menu_state == "Evaluasi Model":
-            st.write("Plot hasil evaluasi model di sini.")      
+            pilih_model = st.session_state.get("pilih_model", None)
+
+            model_map = {
+                "LSTM-PSO": "lstm_pso",
+                "ELM-PSO": "elm_pso",
+                "LSTM-ELM-PSO": "hybrid_pso",
+                "ARIMA": "arima"
+            }
+    
+            nama_model = model_map.get(pilih_model)
+    
+            if nama_model:
+                image = plot_evaluasi(nama_model)
+                if image:
+                    st.image(image, caption=f"Plot Evaluasi: {pilih_model}", use_column_width=True)
+                else:
+                    st.warning(f"Plot gambar untuk model `{pilih_model}` tidak ditemukan.")
+            else:
+                st.info("Silakan pilih model terlebih dahulu.")      
             
         elif st.session_state.menu_state == "Forecast":
             st.subheader("Hasil Prediksi")
