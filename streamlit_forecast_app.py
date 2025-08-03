@@ -189,20 +189,21 @@ else:
     with col_plot:
         # st.subheader(f"📌 {st.session_state.menu_state}")
         if st.session_state.menu_state == "Evaluasi Model":
-            pilih_model = st.session_state.get("pilih_model", "")
-    
+            pilih_model = st.session_state.get("pilih_model", None)
+
             model_map = {
-                "LSTM-PSO": "lstm_pso",
-                "ELM-PSO": "elm_pso",
-                "LSTM-ELM-PSO": "hybrid_pso",
+                "LSTM-PSO": "lstm",
+                "ELM-PSO": "elm",
+                "LSTM-ELM-PSO": "hybrid",
                 "ARIMA": "arima"
             }
     
-            if pilih_model and pilih_model in model_map:
-                nama_model = model_map[pilih_model]
+            nama_model = model_map.get(pilih_model)
+    
+            if nama_model:
                 image = plot_evaluasi(nama_model)
                 if image:
-                    st.image(image, caption=f"Plot Evaluasi: {pilih_model}", use_container_width=True)
+                    st.image(image, caption=f"Plot Evaluasi: {pilih_model}", use_column_width=True)
                 else:
                     st.warning(f"Plot gambar untuk model `{pilih_model}` tidak ditemukan.")
             else:
