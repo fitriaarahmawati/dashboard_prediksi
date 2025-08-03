@@ -143,54 +143,50 @@ else:
             
     # Kolom 3: Tabel
     with col_table:
-        # st.subheader("📊 Tabel")
         if st.session_state.menu_state == "Evaluasi Model":
-            # st.write("Plot hasil evaluasi model di sini.")
-            if "eval_model" in st.session_state and st.session_state.eval_model != "":
-                st.session_state.eval_model = ""
-        
-            pilih_model = st.selectbox(
+            pilih_model_eval = st.selectbox(
                 "Pilih Model",
                 ["", "LSTM-PSO", "ELM-PSO", "LSTM-ELM-PSO", "ARIMA"],
                 key="eval_model"
             )
-        
-            df_evaluasi, file_path = load_evaluation_from_csv(pilih_model)
-        
-            if df_evaluasi is not None and not df_evaluasi.empty:
-                st.session_state.df_forecast = df_evaluasi
-                st.session_state.pilih_model = pilih_model
-                st.markdown(f"### Hasil Evaluasi")
-                st.dataframe(df_evaluasi)
-            
+    
+            if pilih_model_eval:
+                df_evaluasi, file_path = load_evaluation_from_csv(pilih_model_eval)
+    
+                if df_evaluasi is not None and not df_evaluasi.empty:
+                    df_evaluasi = df_evaluasi[["RMSE", "MAE", "MAPE"]]  # Hanya tampilkan kolom yang kamu mau
+                    st.markdown(f"### Hasil Evaluasi")
+                    st.dataframe(df_evaluasi, use_container_width=True)
+            else:
+                st.info("Silakan pilih model terlebih dahulu.")
+    
         elif st.session_state.menu_state == "Forecast":
-            # st.write("Grafik hasil forecast ditampilkan di sini.")
-            if "pilih_model" not in st.session_state or st.session_state.menu_state != "Forecast":
-                st.session_state.pilih_model = ""
-            pilih_model = st.selectbox("Pilih Model", ["", "LSTM-PSO", "ELM-PSO", "LSTM-ELM-PSO", "ARIMA"], key="pilih_model")
-            pilih_hari = st.selectbox("Jumlah hari", ["", "10", "15"], key="n_forecast")
-
-            df_forecast, file_name = load_forecast_result(pilih_model, pilih_hari)
-            
-            if df_forecast is not None:
-                st.session_state.df_forecast = df_forecast
-                st.session_state.pilih_model = pilih_model
-                st.session_state.pilih_hari = pilih_hari
-                st.markdown("### Hasil Prediksi")
-                st.dataframe(df_forecast['Prediksi'])
-            elif pilih_model and pilih_hari:
-                st.warning(f"File `{file_name}` tidak ditemukan.")
-                
+            pilih_model_forecast = st.selectbox(
+                "Pilih Model", ["", "LSTM-PSO", "ELM-PSO", "LSTM-ELM-PSO", "ARIMA"],
+                key="forecast_model"
+            )
+            pilih_hari = st.selectbox("Jumlah hari", ["", "10", "15"], key="forecast_days")
+    
+            if pilih_model_forecast and pilih_hari:
+                df_forecast, file_name = load_forecast_result(pilih_model_forecast, pilih_hari)
+                if df_forecast is not None:
+                    st.session_state["df_forecast"] = df_forecast
+                    st.markdown("### Hasil Prediksi")
+                    st.dataframe(df_forecast['Prediksi'], use_container_width=True)
+                else:
+                    st.warning(f"File `{file_name}` tidak ditemukan.")
+    
         elif st.session_state.menu_state == "Statistik Deskriptif":
             st.write("Statistik Deskriptif")
             st.table(data.describe().round(2))
     
+    
     # Kolom 2: Konten Plot / Visualisasi
     with col_plot:
         if st.session_state.menu_state == "Evaluasi Model":
-            pilih_model = st.session_state.get("eval_model", "")
-            
-            if pilih_model:  # hanya jika sudah memilih model
+            pilih_model_eval = st.session_state.get("eval_model", "")
+    
+            if pilih_model_eval:
                 model_map = {
                     "LSTM-PSO": "lstm",
                     "ELM-PSO": "elm",
@@ -198,29 +194,33 @@ else:
                     "ARIMA": "arima"
                 }
     
-                nama_model = model_map.get(pilih_model)
+                nama_model = model_map.get(pilih_model_eval)
                 if nama_model:
                     image = plot_evaluasi(nama_model)
                     if image:
-                        st.image(image, caption=f"Plot Evaluasi: {pilih_model}", use_column_width=True)
+                        st.image(image, caption=f"Plot Evaluasi: {pilih_model_eval}", use_column_width=True)
                     else:
-                        st.warning(f"Plot gambar untuk model `{pilih_model}` tidak ditemukan.")
+                        st.warning(f"Plot gambar untuk model `{pilih_model_eval}` tidak ditemukan.")
             else:
                 st.info("Silakan pilih model terlebih dahulu.")
     
         elif st.session_state.menu_state == "Forecast":
             st.subheader("Hasil Prediksi")
-            if st.session_state.get("df_forecast") is not None:
+            df_forecast = st.session_state.get("df_forecast")
+            pilih_model_forecast = st.session_state.get("forecast_model", "")
+            pilih_hari = st.session_state.get("forecast_days", "")
+    
+            if df_forecast is not None and pilih_model_forecast and pilih_hari:
                 df_hist = pd.read_csv("data/harga_kopi.csv", index_col=0, parse_dates=True)
-                forecast_days = int(st.session_state.get("pilih_hari", 0))
-                forecast_vals = st.session_state.df_forecast["Prediksi"].values
+                forecast_days = int(pilih_hari)
+                forecast_vals = df_forecast["Prediksi"].values
     
                 fig = plot_forecast(df_hist, forecast_vals, forecast_days,
-                                    title=f"Forecast {st.session_state.pilih_model} - {st.session_state.pilih_hari} Hari")
+                                    title=f"Forecast {pilih_model_forecast} - {pilih_hari} Hari")
                 st.pyplot(fig)
             else:
                 st.info("Silakan pilih model dan jumlah hari yang akan diprediksi.")
-                
+    
         elif st.session_state.menu_state == "Statistik Deskriptif":
             st.subheader("Dataset")
             st.line_chart(df['Close'])
