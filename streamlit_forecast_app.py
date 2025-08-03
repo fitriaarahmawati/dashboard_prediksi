@@ -155,7 +155,7 @@ else:
             if df_evaluasi is not None and not df_evaluasi.empty:
                 st.session_state.df_forecast = df_evaluasi
                 st.session_state.pilih_model = pilih_model
-                st.markdown(f"### Hasil Evaluasi untuk {pilih_model}")
+                st.markdown("### Hasil Evaluasi")
                 st.dataframe(df_evaluasi)
             elif pilih_model:
                 st.warning(f"File `{file_path}` tidak ditemukan.")
