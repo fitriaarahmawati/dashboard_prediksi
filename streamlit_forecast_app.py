@@ -198,11 +198,9 @@ else:
                 if nama_model:
                     image = plot_evaluasi(nama_model)
                     if image:
-                        st.image(image, caption=f"Plot Evaluasi: {pilih_model_eval}", use_column_width=True)
+                        st.image(image, caption=f"Plot Evaluasi: {pilih_model_eval}", use_container_width=True)
                     else:
                         st.warning(f"Plot gambar untuk model `{pilih_model_eval}` tidak ditemukan.")
-            else:
-                st.info("Silakan pilih model terlebih dahulu.")
     
         elif st.session_state.menu_state == "Forecast":
             st.subheader("Hasil Prediksi")
