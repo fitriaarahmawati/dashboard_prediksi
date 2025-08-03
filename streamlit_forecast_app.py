@@ -199,7 +199,8 @@ else:
     
             nama_model = model_map.get(pilih_model)
     
-            if nama_model:
+            if pilih_model and pilih_model in model_map:
+                nama_model = model_map[pilih_model]
                 image = plot_evaluasi(nama_model)
                 if image:
                     st.image(image, caption=f"Plot Evaluasi: {pilih_model}", use_container_width=True)
