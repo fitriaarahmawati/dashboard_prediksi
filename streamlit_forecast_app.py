@@ -146,8 +146,8 @@ else:
         # st.subheader("📊 Tabel")
         if st.session_state.menu_state == "Evaluasi Model":
             # st.write("Plot hasil evaluasi model di sini.")
-            if "eval_model" in st.session_state and st.session_state.eval_model != "":
-                st.session_state.eval_model = ""
+            st.session_state.eval_model = ""
+            st.session_state.pilih_model = ""
         
             pilih_model = st.selectbox(
                 "Pilih Model",
@@ -160,7 +160,7 @@ else:
             if df_evaluasi is not None and not df_evaluasi.empty:
                 st.session_state.df_forecast = df_evaluasi
                 st.session_state.pilih_model = pilih_model
-                st.markdown(f"### Hasil Evaluasi untuk {pilih_model}")
+                st.markdown(f"### Hasil Evaluasi")
                 st.dataframe(df_evaluasi)
             
         elif st.session_state.menu_state == "Forecast":
@@ -218,7 +218,7 @@ else:
                 fig = plot_forecast(df_hist, forecast_vals, forecast_days, title=f"Forecast {pilih_model} - {pilih_hari} Hari")
                 st.pyplot(fig)
             else:
-                st.write("Silakan pilih model dan jumlah hari yang akan diprediksi.")
+                st.info("Silakan pilih model dan jumlah hari yang akan diprediksi.")
             
         elif st.session_state.menu_state == "Statistik Deskriptif":
             st.subheader("Dataset")
